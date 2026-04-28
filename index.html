@@ -85,6 +85,7 @@
         .group-international { border-left-color: #f97316; }
         .group-marketing { border-left-color: #0ea5e9; }
         .group-tech { border-left-color: #10b981; }
+        .group-strategy { border-left-color: #f97316; }
         .tab-btn { transition: all 0.2s ease; }
         .tab-btn.active { background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%); color: white; }
         .alert-box { border-left: 4px solid #f59e0b; background: #fffbeb; border-color: #f59e0b; }
@@ -177,8 +178,9 @@
                 <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('international')">4. 国际业务部</button>
                 <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('marketing')">5. 营销部</button>
                 <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('tech')">6. 技术部</button>
-                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('review')">7. 复盘机制</button>
-                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-teal-100 text-teal-700 font-semibold" onclick="showSection('maps')">8. 展馆地图 🗺️</button>
+                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('strategy')">7. 战促部</button>
+                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('review')">8. 复盘机制</button>
+                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-teal-100 text-teal-700 font-semibold" onclick="showSection('maps')">9. 展馆地图 🗺️</button>
             </div>
         </div>
     </div>
@@ -1330,7 +1332,78 @@
             </div>
         </section>
 
-        <!-- 7. 复盘机制 -->
+        <!-- 7. 战促部 -->
+        <section id="section-strategy" class="hidden">
+            <div class="mb-6">
+                <div class="flex items-center gap-3">
+                    <span class="text-3xl">🎯</span>
+                    <h2 class="text-2xl font-bold">战促部</h2>
+                    <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm">王翠萍</span>
+                </div>
+            </div>
+
+            <!-- 王翠萍 -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-orange-200 mb-6 group-card group-strategy">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-bold">王</div>
+                    <div>
+                        <h3 class="text-xl font-bold">王翠萍</h3>
+                        <p class="text-orange-600 text-sm">战略促销部 · 技术趋势与人才观察</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="bg-orange-50 rounded-lg p-4">
+                        <div class="font-semibold text-orange-800 mb-3">一、学习和了解未来3-5年技术方向</div>
+                        <div class="space-y-3">
+                            <div class="bg-white rounded-lg p-4">
+                                <div class="font-medium text-orange-700 mb-2">1. 智能化与自动化</div>
+                                <p class="text-sm text-gray-600">重点关注AI驱动的柔性制造、数字孪生、智能软件定义工厂等前沿方案，学习如何将AI视觉检测系统等融入定制化机械的解决方案中。</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <div class="font-medium text-orange-700 mb-2">2. 可持续性与循环经济</div>
+                                <p class="text-sm text-gray-600">关注欧盟《包装及包装废弃物法规》（PPWR）带来的机遇与挑战。</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <div class="font-medium text-orange-700 mb-2">3. 柔性化与模块化</div>
+                                <p class="text-sm text-gray-600">重点了解能实现"快速切换"、"开放式架构"等柔性的模块化设计。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-orange-50 rounded-lg p-4">
+                        <div class="font-semibold text-orange-800 mb-3">二、重点关注企业与展品</div>
+                        <p class="text-sm text-gray-600 mb-3">如克朗斯（Krones）的未来包装、西得乐（Sidel）的智能化产线、马尔凯西尼（Marchesini）的单一材料及AI清场系统、Milliken的聚合物添加剂等，了解其原理、核心优势及思考与自身业务的结合点。</p>
+                    </div>
+
+                    <div class="bg-orange-50 rounded-lg p-4">
+                        <div class="font-semibold text-orange-800 mb-3">三、利用展会接触海外人才</div>
+                        <p class="text-sm text-gray-600">如果看到了潜在的海外研发或技术人才，可以主动交流。</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="font-semibold text-gray-700 mb-2">🗺️ 重点展位</div>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H1 Krones</span>
+                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H2 Sidel</span>
+                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H16 Marchesini</span>
+                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H6 Syntegon</span>
+                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H3 IMA</span>
+                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H4 GEA</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 rounded-lg p-4">
+                        <div class="font-semibold text-blue-800 mb-2">📋 交付成果</div>
+                        <p class="text-sm text-gray-600">《未来3-5年技术趋势分析报告》</p>
+                        <p class="text-sm text-gray-600">《PPWR法规对我司业务的影响评估》</p>
+                        <p class="text-sm text-gray-600">《海外人才接触记录》</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 复盘机制 -->
         <section id="section-review" class="hidden">
             <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-6">
                 <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
