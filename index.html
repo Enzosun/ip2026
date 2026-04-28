@@ -99,6 +99,38 @@
         .hall-nav-btn { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         #lightbox img { touch-action: pinch-zoom; }
         .info-box { border-left: 4px solid #0ea5e9; background: #f0f9ff; }
+
+        /* 移动端：展馆导航改为顶部横向滚动标签栏 */
+        @media (max-width: 1023px) {
+            #hall-nav-sidebar {
+                width: 100% !important;
+                flex-shrink: unset !important;
+            }
+            #hall-nav-sticky {
+                position: static !important;
+                padding: 8px !important;
+            }
+            #hall-nav-list {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                max-height: none !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 6px !important;
+                padding-bottom: 4px;
+            }
+            #hall-nav-list::-webkit-scrollbar { display: none; }
+            #hall-nav-list .hall-nav-btn {
+                flex-shrink: 0;
+                font-size: 13px !important;
+                padding: 7px 14px !important;
+                overflow: visible !important;
+                text-overflow: unset !important;
+            }
+            #hall-nav-label { display: none; }
+        }
         @media (max-width: 1024px) {
             .hall-nav-btn { font-size: 12px; padding: 6px 8px; }
         }
@@ -1423,10 +1455,10 @@
 
             <div class="flex flex-col lg:flex-row gap-6">
                 <!-- 左侧展馆导航 -->
-                <div class="lg:w-48 flex-shrink-0">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-3 sticky top-20">
-                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3 px-1">选择展馆</p>
-                        <div class="flex flex-col gap-1.5 max-h-screen overflow-y-auto lg:max-h-[80vh]">
+                <div id="hall-nav-sidebar" class="lg:w-48 flex-shrink-0">
+                    <div id="hall-nav-sticky" class="bg-white rounded-xl shadow-sm border border-gray-100 p-3 sticky top-20">
+                        <p id="hall-nav-label" class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3 px-1">选择展馆</p>
+                        <div id="hall-nav-list" class="flex flex-col gap-1.5 max-h-screen overflow-y-auto lg:max-h-[80vh]">
                             <button 
             onclick="switchHall('ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view', this)"
             class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-primary-600 text-white border border-gray-200"
