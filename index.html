@@ -100,7 +100,15 @@
         #lightbox img { touch-action: pinch-zoom; }
         .info-box { border-left: 4px solid #0ea5e9; background: #f0f9ff; }
 
-        /* 移动端：展馆导航改为顶部横向滚动标签栏 */
+        
+        /* 缩略图加载后淡入，避免闪烁 */
+        .lazy-img { opacity: 1 !important; transition: opacity 0.3s ease; }
+        .lazy-img[loading] { opacity: 0.6; }
+        /* 轻触提示 */
+        .lazy-img { cursor: pointer; }
+        .lazy-img:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+/* 移动端：展馆导航改为顶部横向滚动标签栏 */
         @media (max-width: 1023px) {
             #hall-nav-sidebar {
                 width: 100% !important;
@@ -1574,11 +1582,11 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view.webp" 
+                src="maps_thumb/ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="全场总览图"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -1591,31 +1599,31 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/EN1_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/EN1_p1.webp" 
+                src="maps_thumb/EN1_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="展馆入口图 (EN1)"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/EN1_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/EN1_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/EN1_p2.webp" 
+                src="maps_thumb/EN1_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="展馆入口图 (EN1)"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/EN1_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/EN1_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/EN1_p3.webp" 
+                src="maps_thumb/EN1_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="展馆入口图 (EN1)"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/EN1_p3.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -1628,31 +1636,31 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/ENB_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/ENB_p1.webp" 
+                src="maps_thumb/ENB_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="展馆入口图 (ENB)"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/ENB_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/ENB_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/ENB_p2.webp" 
+                src="maps_thumb/ENB_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="展馆入口图 (ENB)"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/ENB_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/ENB_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/ENB_p3.webp" 
+                src="maps_thumb/ENB_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="展馆入口图 (ENB)"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/ENB_p3.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -1665,51 +1673,51 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle1_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle1_p1.webp" 
+                src="maps_thumb/Halle1_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle1_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle1_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle1_p2.webp" 
+                src="maps_thumb/Halle1_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle1_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle1_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle1_p3.webp" 
+                src="maps_thumb/Halle1_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle1_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle1_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle1_p4.webp" 
+                src="maps_thumb/Halle1_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle1_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle1_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle1_p5.webp" 
+                src="maps_thumb/Halle1_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle1_p5.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -1722,61 +1730,61 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle3_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle3_p1.webp" 
+                src="maps_thumb/Halle3_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="3号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle3_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle3_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle3_p2.webp" 
+                src="maps_thumb/Halle3_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="3号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle3_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle3_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle3_p3.webp" 
+                src="maps_thumb/Halle3_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="3号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle3_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle3_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle3_p4.webp" 
+                src="maps_thumb/Halle3_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="3号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle3_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle3_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle3_p5.webp" 
+                src="maps_thumb/Halle3_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="3号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle3_p5.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle3_p6.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle3_p6.webp" 
+                src="maps_thumb/Halle3_p6.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="3号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle3_p6.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -1789,61 +1797,61 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle4_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle4_p1.webp" 
+                src="maps_thumb/Halle4_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="4号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle4_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle4_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle4_p2.webp" 
+                src="maps_thumb/Halle4_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="4号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle4_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle4_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle4_p3.webp" 
+                src="maps_thumb/Halle4_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="4号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle4_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle4_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle4_p4.webp" 
+                src="maps_thumb/Halle4_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="4号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle4_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle4_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle4_p5.webp" 
+                src="maps_thumb/Halle4_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="4号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle4_p5.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle4_p6.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle4_p6.webp" 
+                src="maps_thumb/Halle4_p6.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="4号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle4_p6.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -1856,41 +1864,41 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle5_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle5_p1.webp" 
+                src="maps_thumb/Halle5_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="5号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle5_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle5_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle5_p2.webp" 
+                src="maps_thumb/Halle5_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="5号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle5_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle5_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle5_p3.webp" 
+                src="maps_thumb/Halle5_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="5号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle5_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle5_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle5_p4.webp" 
+                src="maps_thumb/Halle5_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="5号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle5_p4.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -1903,61 +1911,61 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle6_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle6_p1.webp" 
+                src="maps_thumb/Halle6_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="6号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle6_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle6_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle6_p2.webp" 
+                src="maps_thumb/Halle6_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="6号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle6_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle6_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle6_p3.webp" 
+                src="maps_thumb/Halle6_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="6号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle6_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle6_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle6_p4.webp" 
+                src="maps_thumb/Halle6_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="6号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle6_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle6_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle6_p5.webp" 
+                src="maps_thumb/Halle6_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="6号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle6_p5.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle6_p6.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle6_p6.webp" 
+                src="maps_thumb/Halle6_p6.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="6号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle6_p6.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -1970,31 +1978,31 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7_p1.webp" 
+                src="maps_thumb/Halle7_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7_p2.webp" 
+                src="maps_thumb/Halle7_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7_p3.webp" 
+                src="maps_thumb/Halle7_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7_p3.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2007,71 +2015,71 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.1_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.1_p1.webp" 
+                src="maps_thumb/Halle7.1_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.1_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.1_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.1_p2.webp" 
+                src="maps_thumb/Halle7.1_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.1_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.1_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.1_p3.webp" 
+                src="maps_thumb/Halle7.1_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.1_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.1_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.1_p4.webp" 
+                src="maps_thumb/Halle7.1_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.1_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.1_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.1_p5.webp" 
+                src="maps_thumb/Halle7.1_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.1_p5.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.1_p6.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.1_p6.webp" 
+                src="maps_thumb/Halle7.1_p6.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.1_p6.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.1_p7.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.1_p7.webp" 
+                src="maps_thumb/Halle7.1_p7.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.1号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.1_p7.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2084,101 +2092,101 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.2_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.2_p1.webp" 
+                src="maps_thumb/Halle7.2_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.2号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.2_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.2_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.2_p2.webp" 
+                src="maps_thumb/Halle7.2_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.2号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.2_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.2_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.2_p3.webp" 
+                src="maps_thumb/Halle7.2_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.2号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.2_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.2_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.2_p4.webp" 
+                src="maps_thumb/Halle7.2_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.2号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.2_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.2_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.2_p5.webp" 
+                src="maps_thumb/Halle7.2_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.2号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.2_p5.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.2_p6.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.2_p6.webp" 
+                src="maps_thumb/Halle7.2_p6.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.2号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.2_p6.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.2_p7.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.2_p7.webp" 
+                src="maps_thumb/Halle7.2_p7.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.2号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.2_p7.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.2_p8.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.2_p8.webp" 
+                src="maps_thumb/Halle7.2_p8.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.2号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.2_p8.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.2_p9.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.2_p9.webp" 
+                src="maps_thumb/Halle7.2_p9.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.2号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.2_p9.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7.2_p10.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7.2_p10.webp" 
+                src="maps_thumb/Halle7.2_p10.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7.2号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7.2_p10.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2191,51 +2199,51 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7A_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7A_p1.webp" 
+                src="maps_thumb/Halle7A_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7A_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7A_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7A_p2.webp" 
+                src="maps_thumb/Halle7A_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7A_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7A_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7A_p3.webp" 
+                src="maps_thumb/Halle7A_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7A_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7A_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7A_p4.webp" 
+                src="maps_thumb/Halle7A_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7A_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle7A_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle7A_p5.webp" 
+                src="maps_thumb/Halle7A_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="7A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle7A_p5.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2248,71 +2256,71 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8A_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8A_p1.webp" 
+                src="maps_thumb/Halle8A_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8A_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8A_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8A_p2.webp" 
+                src="maps_thumb/Halle8A_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8A_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8A_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8A_p3.webp" 
+                src="maps_thumb/Halle8A_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8A_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8A_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8A_p4.webp" 
+                src="maps_thumb/Halle8A_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8A_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8A_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8A_p5.webp" 
+                src="maps_thumb/Halle8A_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8A_p5.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8A_p6.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8A_p6.webp" 
+                src="maps_thumb/Halle8A_p6.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8A_p6.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8A_p7.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8A_p7.webp" 
+                src="maps_thumb/Halle8A_p7.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8A_p7.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2325,101 +2333,101 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8B_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8B_p1.webp" 
+                src="maps_thumb/Halle8B_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8B_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8B_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8B_p2.webp" 
+                src="maps_thumb/Halle8B_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8B_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8B_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8B_p3.webp" 
+                src="maps_thumb/Halle8B_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8B_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8B_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8B_p4.webp" 
+                src="maps_thumb/Halle8B_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8B_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8B_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8B_p5.webp" 
+                src="maps_thumb/Halle8B_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8B_p5.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8B_p6.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8B_p6.webp" 
+                src="maps_thumb/Halle8B_p6.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8B_p6.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8B_p7.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8B_p7.webp" 
+                src="maps_thumb/Halle8B_p7.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8B_p7.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8B_p8.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8B_p8.webp" 
+                src="maps_thumb/Halle8B_p8.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8B_p8.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8B_p9.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8B_p9.webp" 
+                src="maps_thumb/Halle8B_p9.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8B_p9.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle8B_p10.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle8B_p10.webp" 
+                src="maps_thumb/Halle8B_p10.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="8B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle8B_p10.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2432,71 +2440,71 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle9_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle9_p1.webp" 
+                src="maps_thumb/Halle9_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="9号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle9_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle9_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle9_p2.webp" 
+                src="maps_thumb/Halle9_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="9号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle9_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle9_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle9_p3.webp" 
+                src="maps_thumb/Halle9_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="9号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle9_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle9_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle9_p4.webp" 
+                src="maps_thumb/Halle9_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="9号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle9_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle9_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle9_p5.webp" 
+                src="maps_thumb/Halle9_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="9号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle9_p5.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle9_p6.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle9_p6.webp" 
+                src="maps_thumb/Halle9_p6.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="9号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle9_p6.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle9_p7.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle9_p7.webp" 
+                src="maps_thumb/Halle9_p7.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="9号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle9_p7.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2509,71 +2517,71 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle10_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle10_p1.webp" 
+                src="maps_thumb/Halle10_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="10号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle10_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle10_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle10_p2.webp" 
+                src="maps_thumb/Halle10_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="10号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle10_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle10_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle10_p3.webp" 
+                src="maps_thumb/Halle10_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="10号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle10_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle10_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle10_p4.webp" 
+                src="maps_thumb/Halle10_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="10号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle10_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle10_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle10_p5.webp" 
+                src="maps_thumb/Halle10_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="10号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle10_p5.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle10_p6.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle10_p6.webp" 
+                src="maps_thumb/Halle10_p6.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="10号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle10_p6.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle10_p7.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle10_p7.webp" 
+                src="maps_thumb/Halle10_p7.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="10号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle10_p7.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2586,61 +2594,61 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle11_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle11_p1.webp" 
+                src="maps_thumb/Halle11_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="11号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle11_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle11_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle11_p2.webp" 
+                src="maps_thumb/Halle11_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="11号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle11_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle11_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle11_p3.webp" 
+                src="maps_thumb/Halle11_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="11号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle11_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle11_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle11_p4.webp" 
+                src="maps_thumb/Halle11_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="11号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle11_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle11_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle11_p5.webp" 
+                src="maps_thumb/Halle11_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="11号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle11_p5.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle11_p6.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle11_p6.webp" 
+                src="maps_thumb/Halle11_p6.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="11号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle11_p6.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2653,51 +2661,51 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle12_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle12_p1.webp" 
+                src="maps_thumb/Halle12_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="12号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle12_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle12_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle12_p2.webp" 
+                src="maps_thumb/Halle12_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="12号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle12_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle12_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle12_p3.webp" 
+                src="maps_thumb/Halle12_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="12号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle12_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle12_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle12_p4.webp" 
+                src="maps_thumb/Halle12_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="12号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle12_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle12_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle12_p5.webp" 
+                src="maps_thumb/Halle12_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="12号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle12_p5.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2710,51 +2718,51 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle13_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle13_p1.webp" 
+                src="maps_thumb/Halle13_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="13号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle13_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle13_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle13_p2.webp" 
+                src="maps_thumb/Halle13_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="13号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle13_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle13_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle13_p3.webp" 
+                src="maps_thumb/Halle13_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="13号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle13_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle13_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle13_p4.webp" 
+                src="maps_thumb/Halle13_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="13号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle13_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle13_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle13_p5.webp" 
+                src="maps_thumb/Halle13_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="13号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle13_p5.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2767,41 +2775,41 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle14_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle14_p1.webp" 
+                src="maps_thumb/Halle14_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="14号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle14_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle14_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle14_p2.webp" 
+                src="maps_thumb/Halle14_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="14号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle14_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle14_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle14_p3.webp" 
+                src="maps_thumb/Halle14_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="14号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle14_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle14_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle14_p4.webp" 
+                src="maps_thumb/Halle14_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="14号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle14_p4.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2814,61 +2822,61 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle15_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle15_p1.webp" 
+                src="maps_thumb/Halle15_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="15号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle15_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle15_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle15_p2.webp" 
+                src="maps_thumb/Halle15_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="15号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle15_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle15_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle15_p3.webp" 
+                src="maps_thumb/Halle15_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="15号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle15_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle15_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle15_p4.webp" 
+                src="maps_thumb/Halle15_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="15号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle15_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle15_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle15_p5.webp" 
+                src="maps_thumb/Halle15_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="15号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle15_p5.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle15_p6.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle15_p6.webp" 
+                src="maps_thumb/Halle15_p6.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="15号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle15_p6.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2881,51 +2889,51 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle16_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle16_p1.webp" 
+                src="maps_thumb/Halle16_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="16号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle16_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle16_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle16_p2.webp" 
+                src="maps_thumb/Halle16_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="16号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle16_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle16_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle16_p3.webp" 
+                src="maps_thumb/Halle16_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="16号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle16_p3.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle16_p4.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle16_p4.webp" 
+                src="maps_thumb/Halle16_p4.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="16号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle16_p4.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle16_p5.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle16_p5.webp" 
+                src="maps_thumb/Halle16_p5.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="16号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle16_p5.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2938,31 +2946,31 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle17_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle17_p1.webp" 
+                src="maps_thumb/Halle17_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="17号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle17_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle17_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle17_p2.webp" 
+                src="maps_thumb/Halle17_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="17号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle17_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle17_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle17_p3.webp" 
+                src="maps_thumb/Halle17_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="17号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle17_p3.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -2975,31 +2983,31 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle18A_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle18A_p1.webp" 
+                src="maps_thumb/Halle18A_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="18A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle18A_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle18A_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle18A_p2.webp" 
+                src="maps_thumb/Halle18A_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="18A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle18A_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle18A_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle18A_p3.webp" 
+                src="maps_thumb/Halle18A_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="18A号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle18A_p3.png')"
                 style="max-width:100%;"
             >
         </div>
@@ -3012,31 +3020,31 @@
         
         <div class="mb-4">
             <img 
-                data-src="maps/Halle18B_p1.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle18B_p1.webp" 
+                src="maps_thumb/Halle18B_p1.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="18B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle18B_p1.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle18B_p2.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle18B_p2.webp" 
+                src="maps_thumb/Halle18B_p2.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="18B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle18B_p2.png')"
                 style="max-width:100%;"
             >
         </div>
         <div class="mb-4">
             <img 
-                data-src="maps/Halle18B_p3.png" 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1489 2105'%3E%3Crect width='1489' height='2105' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%239ca3af' font-size='40' font-family='Arial'%3E加载中...%3C/text%3E%3C/svg%3E"
+                data-src="maps_thumb/Halle18B_p3.webp" 
+                src="maps_thumb/Halle18B_p3.webp"
                 class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
                 alt="18B号馆"
-                onclick="openLightbox(this.src)"
+                onclick="openLightbox('maps/Halle18B_p3.png')"
                 style="max-width:100%;"
             >
         </div>
