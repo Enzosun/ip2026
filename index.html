@@ -3,3197 +3,407 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interpack 2026 观展准备文档 | JOYEA</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: { 50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc', 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 800: '#075985', 900: '#0c4a6e' },
-                        accent: '#f97316',
-                        emerald: { 50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7', 400: '#34d399', 500: '#10b981', 600: '#059669', 700: '#047857' }
-                    },
-                    fontFamily: { sans: ['Inter', 'Noto Sans SC', 'sans-serif'] }
-                }
-            }
-        }
-
-        // 展馆切换
-        function switchHall(hallId, btn) {
-            document.querySelectorAll('.hall-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.hall-nav-btn').forEach(b => {
-                b.classList.remove('bg-primary-600', 'text-white');
-                b.classList.add('bg-white', 'text-gray-700');
-            });
-            const target = document.getElementById('hall-' + hallId);
-            if (target) {
-                target.classList.remove('hidden');
-                // 触发懒加载
-                loadImagesIn(target);
-            }
-            btn.classList.add('bg-primary-600', 'text-white');
-            btn.classList.remove('bg-white', 'text-gray-700');
-        }
-
-        // 懒加载
-        function loadImagesIn(container) {
-            container.querySelectorAll('img.lazy-img[data-src]').forEach(img => {
-                if (!img.dataset.loaded) {
-                    img.src = img.dataset.src;
-                    img.dataset.loaded = 'true';
-                    img.classList.remove('cursor-zoom-in');
-                    img.classList.add('cursor-zoom-in');
-                }
-            });
-        }
-
-        // 灯箱
-        function openLightbox(src) {
-            const box = document.getElementById('lightbox');
-            const imgEl = document.getElementById('lightbox-img');
-            imgEl.src = src;
-            box.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        // 初始化第一个展馆
-        document.addEventListener('DOMContentLoaded', () => {
-            const first = document.getElementById('hall-ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view');
-            if (first) {
-                first.classList.remove('hidden');
-                loadImagesIn(first);
-            }
-        });
-
-    </script>
+    <title>Interpack 2026 展馆地图 | JOYEA</title>
     <style>
-        @media print {
-            .no-print { display: none !important; }
-            body { font-size: 10pt; }
-            .page-break { page-break-before: always; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);
+            min-height: 100vh;
+            padding: 16px;
         }
-        .gradient-header { background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 50%, #075985 100%); }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(14, 165, 233, 0.15); }
-        .group-card { border-left: 4px solid; }
-        .group-international { border-left-color: #f97316; }
-        .group-marketing { border-left-color: #0ea5e9; }
-        .group-tech { border-left-color: #10b981; }
-        .group-strategy { border-left-color: #f97316; }
-        .tab-btn { transition: all 0.2s ease; }
-        .tab-btn.active { background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%); color: white; }
-        .alert-box { border-left: 4px solid #f59e0b; background: #fffbeb; border-color: #f59e0b; }
-        .info-box { border-left: 4px solid #0ea5e9; background: #f0f9ff; border-color: #0ea5e9; }
-        .success-box { border-left: 4px solid #10b981; background: #f0fdf4; border-color: #10b981; }
-        .hall-tag { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
-        .hall-highlight { background: #dbeafe; color: #1e40af; }
-        .priority-pill { padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 600; }
-        .priority-high { background: #fee2e2; color: #991b1b; }
-        .priority-medium { background: #fef3c7; color: #92400e; }
-        .priority-normal { background: #e0f2fe; color: #075985; }
-        .hall-nav-btn { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        #lightbox img { touch-action: pinch-zoom; }
-        .info-box { border-left: 4px solid #0ea5e9; background: #f0f9ff; }
-
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .header h1 {
+            color: #0c4a6e;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+        .header p {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        .header .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+        }
         
-        /* 缩略图加载后淡入，避免闪烁 */
-        .lazy-img { opacity: 1 !important; transition: opacity 0.3s ease; }
-        .lazy-img[loading] { opacity: 0.6; }
-        /* 轻触提示 */
-        .lazy-img { cursor: pointer; }
-        .lazy-img:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-
-/* 移动端：展馆导航改为顶部横向滚动标签栏 */
-        @media (max-width: 1023px) {
-            #hall-nav-sidebar {
-                width: 100% !important;
-                flex-shrink: unset !important;
-            }
-            #hall-nav-sticky {
-                position: static !important;
-                padding: 8px !important;
-            }
-            #hall-nav-list {
-                flex-direction: row !important;
-                flex-wrap: nowrap !important;
-                overflow-x: auto !important;
-                overflow-y: hidden !important;
-                max-height: none !important;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                gap: 6px !important;
-                padding-bottom: 4px;
-            }
-            #hall-nav-list::-webkit-scrollbar { display: none; }
-            #hall-nav-list .hall-nav-btn {
-                flex-shrink: 0;
-                font-size: 13px !important;
-                padding: 7px 14px !important;
-                overflow: visible !important;
-                text-overflow: unset !important;
-            }
-            #hall-nav-label { display: none; }
+        /* 全场总览 - 大图展示 */
+        .overview-section {
+            max-width: 1200px;
+            margin: 0 auto 24px;
         }
-        @media (max-width: 1024px) {
-            .hall-nav-btn { font-size: 12px; padding: 6px 8px; }
+        .overview-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
         }
-
+        .overview-card .title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .overview-card .title-icon {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .overview-card h2 {
+            color: #1e293b;
+            font-size: 1.1rem;
+        }
+        .overview-card .subtitle {
+            color: #64748b;
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
+        .overview-card img {
+            width: 100%;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .overview-card img:hover {
+            transform: scale(1.01);
+        }
+        
+        /* 展馆网格 */
+        .section-title {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .hall-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .hall-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .hall-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        .hall-card img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            display: block;
+        }
+        .hall-card .info {
+            padding: 10px 12px;
+            text-align: center;
+        }
+        .hall-card .name {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.85rem;
+        }
+        .hall-card .pages {
+            color: #64748b;
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            flex-direction: column;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: rgba(0,0,0,0.5);
+        }
+        .lightbox-title {
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .lightbox-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.1); }
+        .lightbox-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow: auto;
+        }
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .lightbox-nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(0,0,0,0.5);
+            flex-wrap: wrap;
+        }
+        .lightbox-nav button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background 0.2s;
+        }
+        .lightbox-nav button:hover { background: rgba(255,255,255,0.3); }
+        .lightbox-nav button.active { background: #0ea5e9; }
+        .lightbox-nav button.nav-btn {
+            background: rgba(255,255,255,0.1);
+            min-width: 60px;
+        }
+        .lightbox-nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+        
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.75rem;
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 12px; }
+            .header h1 { font-size: 1.25rem; }
+            .hall-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+            .overview-card { padding: 12px; }
+        }
     </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
-    <!-- 导航栏 -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50 no-print">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg gradient-header flex items-center justify-center">
-                    <span class="text-white font-bold text-lg">I</span>
-                </div>
-                <div>
-                    <h1 class="text-lg font-bold text-gray-800">Interpack 2026 观展准备</h1>
-                    <p class="text-xs text-gray-500">仅一联合智造 JOYEA · 德国杜塞尔多夫</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-3">
-                <button onclick="window.print()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition flex items-center gap-2 text-sm">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                    打印文档
-                </button>
-            </div>
-        </div>
-    </nav>
+<body>
+    <div class="header">
+        <h1>Interpack 2026 展馆地图</h1>
+        <p>德国杜塞尔多夫包装展览会 · 仅一联合智造</p>
+        <span class="badge">2026.05.07-13 · 点击放大查看详情</span>
+    </div>
 
-    <!-- Tab 导航 -->
-    <div class="bg-white border-b no-print">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex gap-1 overflow-x-auto py-2">
-                <button class="tab-btn active px-4 py-2 rounded-lg text-sm font-medium" onclick="showSection('overview')">1. 概览与行程</button>
-                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('ees')">2. EES入境注册</button>
-                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('exhibitors')">3. 展台位置</button>
-                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('international')">4. 国际业务部</button>
-                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('marketing')">5. 营销部</button>
-                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('tech')">6. 技术部</button>
-                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('strategy')">7. 战促部</button>
-                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100" onclick="showSection('review')">8. 复盘机制</button>
-                <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-teal-100 text-teal-700 font-semibold" onclick="showSection('maps')">9. 展馆地图 🗺️</button>
+    <!-- 全场总览 - 大图展示 -->
+    <div class="overview-section">
+        <div class="overview-card">
+            <div class="title">
+                <div class="title-icon">🗺️</div>
+                <h2>全场总览图</h2>
+                <span class="subtitle">展馆整体布局</span>
             </div>
+            <img src="maps/ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view.png" 
+                 alt="Interpack 2026 全场总览图"
+                 onclick="openLightbox('overview', 1, '全场总览图')">
         </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 py-8">
-        
-        <!-- 1. 概览与行程 -->
-        <section id="section-overview">
-            <!-- 重要提示 -->
-            <div class="alert-box rounded-xl p-5 mb-6">
-                <div class="flex items-start gap-3">
-                    <span class="text-2xl">⚠️</span>
-                    <div>
-                        <h3 class="font-bold text-amber-800">重要提示</h3>
-                        <ul class="text-amber-700 text-sm mt-2 space-y-1">
-                            <li>• 协会领队：高铱笛 13188291336，接机导游：张翼 +491798844888</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <!-- 展馆列表 -->
+    <p class="section-title">— 点击各馆查看详情 —</p>
+    <div class="hall-grid" id="hallGrid"></div>
 
-            <!-- Hero -->
-            <div class="gradient-header rounded-2xl p-8 text-white mb-8">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <div>
-                        <h1 class="text-3xl font-bold mb-2">Interpack 2026</h1>
-                        <p class="text-primary-100 text-lg">德国杜塞尔多夫包装展览会</p>
-                        <p class="text-primary-200 mt-2">全球规模最大、最专业的包装与加工领域盛会 · 三年一届</p>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur rounded-xl p-4 text-right">
-                        <div class="text-4xl font-bold">5月7-13日</div>
-                        <div class="text-primary-100 mt-1">2026 · 7天行程</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 基本信息卡片 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 card-hover">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center">
-                            <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                        </div>
-                        <span class="text-xs text-gray-500">地点</span>
-                    </div>
-                    <p class="font-semibold">杜塞尔多夫会展中心</p>
-                    <p class="text-gray-500 text-xs">Stockumer Kirchstr. 61</p>
-                </div>
-                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 card-hover">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center">
-                            <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                        </div>
-                        <span class="text-xs text-gray-500">展期</span>
-                    </div>
-                    <p class="font-semibold">5月7日 - 13日</p>
-                    <p class="text-gray-500 text-xs">每日 10:00 - 18:00</p>
-                </div>
-                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 card-hover">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center">
-                            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"/></svg>
-                        </div>
-                        <span class="text-xs text-gray-500">规模</span>
-                    </div>
-                    <p class="font-semibold">2,700+ 展商</p>
-                    <p class="text-gray-500 text-xs">2023年数据</p>
-                </div>
-                <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 card-hover">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-10 h-10 rounded-lg bg-violet-100 flex items-center justify-center">
-                            <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
-                        </div>
-                        <span class="text-xs text-gray-500">观众</span>
-                    </div>
-                    <p class="font-semibold">142,000+</p>
-                    <p class="text-gray-500 text-xs">专业观众（2023）</p>
-                </div>
-            </div>
-
-            <!-- 酒店信息 -->
-            <div class="info-box rounded-xl p-5 mb-8">
-                <h3 class="font-bold text-blue-800 mb-3 flex items-center gap-2">
-                    <span>🏨</span> 酒店信息
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <div>
-                        <p class="font-medium">Oberhausen Neue Mitte affiliated by Meliá</p>
-                        <p class="text-gray-600">Centroallee 280, 46047 Oberhausen, Germany</p>
-                        <p class="text-gray-500">电话: +49 208 82020</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-600"><strong>入住日期:</strong> 5月7日</p>
-                        <p class="text-gray-600"><strong>退房日期:</strong> 5月13日</p>
-                        <p class="text-amber-700 mt-1">展团礼包包含: 转换插头、记录本、笔、订书机、拖鞋、展会门票、10天15G电话卡</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 每日行程 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-8">
-                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                    <span>📅</span> 每日行程
-                </h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="border-b">
-                                <th class="text-left py-3 px-2 font-semibold">日期</th>
-                                <th class="text-left py-3 px-2 font-semibold">日程</th>
-                                <th class="text-left py-3 px-2 font-semibold">备注</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-gray-600">
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-2 font-medium">5月7日 Day1</td>
-                                <td class="py-3 px-2">抵达、开元餐馆晚餐</td>
-                                <td class="py-3 px-2 text-amber-600">注意：接机牌写"中国包协"</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-2 font-medium">5月8日 Day2</td>
-                                <td class="py-3 px-2">参观Interpack展会</td>
-                                <td class="py-3 px-2">晚餐统一安排</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-2 font-medium">5月9日 Day3</td>
-                                <td class="py-3 px-2">部分团员参展，其余Roermond购物</td>
-                                <td class="py-3 px-2">仅一可继续观展</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-2 font-medium">5月10日 Day4</td>
-                                <td class="py-3 px-2">参观Interpack展会</td>
-                                <td class="py-3 px-2">晚餐统一安排</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-2 font-medium">5月11日 Day5</td>
-                                <td class="py-3 px-2">杜塞游览（汽车博物馆、国王大道、莱茵河游船）</td>
-                                <td class="py-3 px-2 text-emerald-600">川外川午餐</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="py-3 px-2 font-medium">5月12日 Day6</td>
-                                <td class="py-3 px-2">科隆游览（大教堂、老城、霍亨索伦桥）</td>
-                                <td class="py-3 px-2 text-emerald-600">科隆小院坝午餐</td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-2 font-medium">5月13日 Day7</td>
-                                <td class="py-3 px-2">午餐后送机，汉莎LH075 杜塞-法兰克福</td>
-                                <td class="py-3 px-2 text-primary-600">开元大酒楼午餐</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 展会四大热点 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <span>🎯</span> 2026年展会四大战略热点
-                </h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <div class="bg-emerald-50 rounded-lg p-4 text-center">
-                        <div class="text-2xl mb-1">♻️</div>
-                        <div class="font-semibold text-emerald-800">循环经济</div>
-                    </div>
-                    <div class="bg-blue-50 rounded-lg p-4 text-center">
-                        <div class="text-2xl mb-1">🌍</div>
-                        <div class="font-semibold text-blue-800">资源管理</div>
-                    </div>
-                    <div class="bg-violet-50 rounded-lg p-4 text-center">
-                        <div class="text-2xl mb-1">💻</div>
-                        <div class="font-semibold text-violet-800">数字技术</div>
-                    </div>
-                    <div class="bg-amber-50 rounded-lg p-4 text-center">
-                        <div class="text-2xl mb-1">🔒</div>
-                        <div class="font-semibold text-amber-800">产品安全</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. EES入境注册 -->
-        <section id="section-ees" class="hidden">
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-6">
-                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <span>🛂</span> EES 入境注册指南
-                </h2>
-                
-                <div class="alert-box rounded-xl p-5 mb-6">
-                    <h3 class="font-bold text-amber-800 mb-2">⚠️ 重要提醒</h3>
-                    <p class="text-amber-700 text-sm">所有非欧盟/申根区公民均需进行EES登记。免签旅客需提供实时面部图像和4个指纹。</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <div class="font-semibold text-gray-800 mb-1">开始日期</div>
-                        <div class="text-primary-600">2025年10月12日</div>
-                    </div>
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <div class="font-semibold text-gray-800 mb-1">登记对象</div>
-                        <div class="text-sm">非欧盟公民，访问&lt;90天</div>
-                    </div>
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <div class="font-semibold text-gray-800 mb-1">费用</div>
-                        <div class="text-emerald-600 font-medium">免费</div>
-                    </div>
-                </div>
-
-                <h3 class="font-bold text-lg mb-4">📝 注册步骤</h3>
-                <div class="space-y-4">
-                    <div class="flex gap-4 p-4 bg-gray-50 rounded-lg">
-                        <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
-                        <div>
-                            <div class="font-medium">在EES系统机器上选择语言</div>
-                            <div class="text-gray-600 text-sm">选择<strong>中文</strong></div>
-                        </div>
-                    </div>
-                    <div class="flex gap-4 p-4 bg-gray-50 rounded-lg">
-                        <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold flex-shrink-0">2</div>
-                        <div>
-                            <div class="font-medium">扫描护照</div>
-                            <div class="text-gray-600 text-sm">将护照首页放置机器扫描处</div>
-                        </div>
-                    </div>
-                    <div class="flex gap-4 p-4 bg-gray-50 rounded-lg">
-                        <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
-                        <div>
-                            <div class="font-medium">居留许可选择</div>
-                            <div class="text-gray-600 text-sm">RESIDENCE PERMIT 选择<strong>否</strong>（游客非长居）</div>
-                        </div>
-                    </div>
-                    <div class="flex gap-4 p-4 bg-gray-50 rounded-lg">
-                        <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
-                        <div>
-                            <div class="font-medium">面部识别</div>
-                            <div class="text-gray-600 text-sm">取出护照，直视机器摄像头</div>
-                        </div>
-                    </div>
-                    <div class="flex gap-4 p-4 bg-gray-50 rounded-lg">
-                        <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold flex-shrink-0">5</div>
-                        <div>
-                            <div class="font-medium">录入指纹</div>
-                            <div class="text-gray-600 text-sm">扫描仪会采集一只手的4个指纹（食指、中指、无名指、小指）</div>
-                        </div>
-                    </div>
-                    <div class="flex gap-4 p-4 bg-gray-50 rounded-lg">
-                        <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold flex-shrink-0">6</div>
-                        <div>
-                            <div class="font-medium">付款方式（可跳过）</div>
-                            <div class="text-gray-600 text-sm">在欧洲的消费由邀请方负责还是自己承担</div>
-                        </div>
-                    </div>
-                    <div class="flex gap-4 p-4 bg-gray-50 rounded-lg">
-                        <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold flex-shrink-0">7</div>
-                        <div>
-                            <div class="font-medium">选定出入境日期</div>
-                        </div>
-                    </div>
-                    <div class="flex gap-4 p-4 bg-gray-50 rounded-lg">
-                        <div class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold flex-shrink-0">8</div>
-                        <div>
-                            <div class="font-medium">旅游保险选择</div>
-                            <div class="text-gray-600 text-sm">完成后完成注册过程</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-6 p-4 bg-blue-50 rounded-lg">
-                    <h4 class="font-semibold text-blue-800 mb-2">💡 提示</h4>
-                    <ul class="text-blue-700 text-sm space-y-1">
-                        <li>• 三年内后续访问仅需扫描护照和面部验证</li>
-                        <li>• 12岁以下儿童无需采集指纹，但需拍照</li>
-                        <li>• 签证持有者的指纹已录入VIS系统，无需再次采集</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 出行准备 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-6">
-                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <span>📦</span> 出行准备清单
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="font-semibold text-gray-700 mb-3">必带物品</h3>
-                        <ul class="space-y-2 text-sm">
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>机票、护照及有效签证页原件及复印件</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>证件照片</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>展会门票（以备入境查验）</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>国内身份证</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>信用卡（Visa/Mastercard，建议带芯片卡）</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>现金约1000欧/人备用</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>转换插头（展团礼包已含）</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>充电宝（随身携带，不可托运）</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold text-gray-700 mb-3">个人用品</h3>
-                        <ul class="space-y-2 text-sm">
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>牙膏、牙刷、拖鞋（展团礼包已含）</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>发梳等个人用品</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>薄外套（飞机/巴士空调冷）</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>正装（正式场合）</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>自用药品（止痛药、肠胃药、晕车药、感冒药等）</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <input type="checkbox" class="w-4 h-4 accent-primary-600">
-                                <span>榨菜类佐餐小菜（口味重者）</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 财务信息 -->
-            <div class="success-box rounded-xl p-5">
-                <h3 class="font-bold text-emerald-800 mb-3 flex items-center gap-2">
-                    <span>💳</span> 财务信息
-                </h3>
-                <ul class="text-emerald-700 text-sm space-y-1">
-                    <li>• 信用卡：可以刷Visa或Mastercard，支持外币刷卡消费</li>
-                    <li>• 现金备用：建议每人1000欧左右</li>
-                    <li>• 外汇携带：随身可携带相当于5000美元的外汇</li>
-                    <li>• 药品入境：自用药品携带没问题</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- 3. 展台位置汇总 -->
-        <section id="section-exhibitors" class="hidden">
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-6">
-                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <span>🗺️</span> 重点展台位置汇总
-                </h2>
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="bg-primary-50">
-                                <th class="text-left py-3 px-3 font-semibold">展商</th>
-                                <th class="text-left py-3 px-3 font-semibold">主要产品</th>
-                                <th class="text-left py-3 px-3 font-semibold">展厅</th>
-                                <th class="text-left py-3 px-3 font-semibold">展位号</th>
-                                <th class="text-left py-3 px-3 font-semibold">优先级</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y">
-                            <!-- IMA - 最大展商 -->
-                            <tr class="hover:bg-amber-50">
-                                <td class="py-3 px-3 font-bold text-amber-800">IMA</td>
-                                <td class="py-3 px-3 text-gray-600">制药/保健品/化妆品包装</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 17</span></td>
-                                <td class="py-3 px-3 font-mono font-bold">A20-1~8</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Marchesini Group</td>
-                                <td class="py-3 px-3 text-gray-600">制药/装盒机</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 15</span></td>
-                                <td class="py-3 px-3 font-mono">A42-1~6</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Syntegon Technology</td>
-                                <td class="py-3 px-3 text-gray-600">软袋/模块化包装</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 6</span></td>
-                                <td class="py-3 px-3 font-mono">A31, A57, C31</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Hassia</td>
-                                <td class="py-3 px-3 text-gray-600">Stick条包</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 17</span></td>
-                                <td class="py-3 px-3 font-mono">A20-5</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Romaco</td>
-                                <td class="py-3 px-3 text-gray-600">制药包装/装盒机</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 16</span></td>
-                                <td class="py-3 px-3 font-mono">D22</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Uhlmann</td>
-                                <td class="py-3 px-3 text-gray-600">制药包装</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 15</span></td>
-                                <td class="py-3 px-3 font-mono">B24</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Mespack</td>
-                                <td class="py-3 px-3 text-gray-600">软袋包装</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 6</span></td>
-                                <td class="py-3 px-3 font-mono">B73</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Universal Pack</td>
-                                <td class="py-3 px-3 text-gray-600">Stick包装</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 16</span></td>
-                                <td class="py-3 px-3 font-mono">B42</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Schubert</td>
-                                <td class="py-3 px-3 text-gray-600">模块化包装系统</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 14</span></td>
-                                <td class="py-3 px-3 font-mono">D01</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">TNA</td>
-                                <td class="py-3 px-3 text-gray-600">软袋包装</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 14</span></td>
-                                <td class="py-3 px-3 font-mono">C56, D56</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">OPTIMA</td>
-                                <td class="py-3 px-3 text-gray-600">胶囊/制药设备</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 16</span></td>
-                                <td class="py-3 px-3 font-mono">F54, F55</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Aranow</td>
-                                <td class="py-3 px-3 text-gray-600">包装设备</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 16</span></td>
-                                <td class="py-3 px-3 font-mono">A54</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">OMAG</td>
-                                <td class="py-3 px-3 text-gray-600">Stick包装</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 15</span></td>
-                                <td class="py-3 px-3 font-mono">B20</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">CAMA Group</td>
-                                <td class="py-3 px-3 text-gray-600">模块化包装</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 13</span></td>
-                                <td class="py-3 px-3 font-mono">A33</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">SOMIC</td>
-                                <td class="py-3 px-3 text-gray-600">胶囊包装</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 14</span></td>
-                                <td class="py-3 px-3 font-mono">A02</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">WOLF</td>
-                                <td class="py-3 px-3 text-gray-600">软袋包装</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 6</span></td>
-                                <td class="py-3 px-3 font-mono">C31</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">IWK</td>
-                                <td class="py-3 px-3 text-gray-600">装盒机</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 15</span></td>
-                                <td class="py-3 px-3 font-mono">C20</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">KOCH</td>
-                                <td class="py-3 px-3 text-gray-600">装盒机</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 15</span></td>
-                                <td class="py-3 px-3 font-mono">B24</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">ULMA</td>
-                                <td class="py-3 px-3 text-gray-600">食品包装</td>
-                                <td class="py-3 px-3">Halle 5/14/16</td>
-                                <td class="py-3 px-3 font-mono">C23/C70/C38</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Weber</td>
-                                <td class="py-3 px-3 text-gray-600">食品包装技术</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 5</span></td>
-                                <td class="py-3 px-3 font-mono">C19</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Fuji</td>
-                                <td class="py-3 px-3 text-gray-600">食品/无菌</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 5</span></td>
-                                <td class="py-3 px-3 font-mono">A05</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Scholz</td>
-                                <td class="py-3 px-3 text-gray-600">灭菌设备</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 5</span></td>
-                                <td class="py-3 px-3 font-mono">D41</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Bosch Rexroth</td>
-                                <td class="py-3 px-3 text-gray-600">控制技术</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 6</span></td>
-                                <td class="py-3 px-3 font-mono">A42</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">GEA</td>
-                                <td class="py-3 px-3 text-gray-600">食品加工</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 17</span></td>
-                                <td class="py-3 px-3 font-mono">B72</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-medium">⭐⭐</span></td>
-                            </tr>
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-3">Bosch</td>
-                                <td class="py-3 px-3 text-gray-600">整线解决方案</td>
-                                <td class="py-3 px-3"><span class="hall-tag hall-highlight">Halle 6</span></td>
-                                <td class="py-3 px-3 font-mono">A42</td>
-                                <td class="py-3 px-3"><span class="priority-pill priority-high">⭐⭐⭐</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 展厅分布图 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <h3 class="font-bold text-lg mb-4">🏛️ 展厅主题分布</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                    <div class="bg-blue-50 rounded-lg p-3">
-                        <div class="font-semibold text-blue-800">Halle 1-7</div>
-                        <div class="text-blue-600">包装材料/包装介质</div>
-                    </div>
-                    <div class="bg-emerald-50 rounded-lg p-3">
-                        <div class="font-semibold text-emerald-800">Halle 5,8,9</div>
-                        <div class="text-emerald-600">食品加工/包装</div>
-                    </div>
-                    <div class="bg-orange-50 rounded-lg p-3">
-                        <div class="font-semibold text-orange-800">Halle 10-15</div>
-                        <div class="text-orange-600">加工与包装技术</div>
-                    </div>
-                    <div class="bg-purple-50 rounded-lg p-3">
-                        <div class="font-semibold text-purple-800">Halle 16-17</div>
-                        <div class="text-purple-600">制药/化妆品包装</div>
-                    </div>
-                    <div class="bg-gray-100 rounded-lg p-3">
-                        <div class="font-semibold text-gray-800">Halle 18A/B</div>
-                        <div class="text-gray-600">Components (配件)</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. 国际业务部 -->
-        <section id="section-international" class="hidden">
-            <div class="mb-6">
-                <div class="flex items-center gap-3">
-                    <span class="text-3xl">🌏</span>
-                    <h2 class="text-2xl font-bold">国际业务部</h2>
-                    <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm">陈锋、岳锦涛</span>
-                </div>
-            </div>
-
-            <!-- 陈锋 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-orange-200 mb-6 group-card group-international">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-bold">陈</div>
-                    <div>
-                        <h3 class="text-xl font-bold">陈锋</h3>
-                        <p class="text-orange-600 text-sm">国际业务战略洞察与渠道布局</p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-semibold text-gray-700 mb-3">🎯 观展目标</h4>
-                        <div class="space-y-3">
-                            <div class="bg-orange-50 rounded-lg p-4">
-                                <div class="font-medium text-orange-800 mb-2">1. 国际标杆对标</div>
-                                <p class="text-sm text-gray-600">Hassia、IMA、Marchesini、Mespack、Universal Pack、OMAG、Invpack、Aranow</p>
-                                <p class="text-sm text-gray-600">CAN线：JBT(PLF)、Gorgenson、Swiss can</p>
-                                <p class="text-sm text-gray-600">模块化：Schubert、CAMA、Syntegon</p>
-                            </div>
-                            <div class="bg-orange-50 rounded-lg p-4">
-                                <div class="font-medium text-orange-800 mb-2">2. 营销与技术研讨会</div>
-                                <p class="text-sm text-gray-600">参加1-2场营销研讨会，学习国际营销方式</p>
-                                <p class="text-sm text-gray-600">参加1-2场技术研讨会，探讨技术引进</p>
-                            </div>
-                            <div class="bg-orange-50 rounded-lg p-4">
-                                <div class="font-medium text-orange-800 mb-2">3. 国内参展企业拜访（3-5家）</div>
-                                <p class="text-sm text-gray-600">了解展会收益、参展渠道</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-semibold text-gray-700 mb-3">🗺️ 重点展位</h4>
-                        <div class="bg-gray-50 rounded-lg p-4 space-y-2">
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">IMA</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H17</span> <span class="font-mono text-amber-600">A20-1~8</span></span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Marchesini</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H15</span> <span class="font-mono">A42-1~6</span></span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Syntegon</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H6</span> <span class="font-mono">A31/A57/C31</span></span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Hassia</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H17</span> <span class="font-mono">A20-5</span></span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Mespack</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H6</span> <span class="font-mono">B73</span></span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Universal Pack</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H16</span> <span class="font-mono">B42</span></span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Schubert</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H14</span> <span class="font-mono">D01</span></span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">CAMA</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H13</span> <span class="font-mono">A33</span></span>
-                            </div>
-                        </div>
-                        
-                        <h4 class="font-semibold text-gray-700 mb-3 mt-4">🔬 关注技术</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs">Ultrasonic sealing</span>
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs">Tension control</span>
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs">隔热技术</span>
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs">冷封技术</span>
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs">AI编程平台</span>
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs">AI视频分析</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 岳锦涛 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-orange-200 group-card group-international">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-bold">岳</div>
-                    <div>
-                        <h3 class="text-xl font-bold">岳锦涛</h3>
-                        <p class="text-orange-600 text-sm">商机挖掘与市场策略</p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="space-y-4">
-                        <div class="bg-orange-50 rounded-lg p-4">
-                            <div class="font-medium text-orange-800 mb-2">🎯 目标一：商机与客户线索</div>
-                            <p class="text-sm text-gray-600 mb-2">重点友商：Hassia、IMA、Marchesini、Mespack、Universal Pack、OMAG、Invpack、Aranow、PLF、Optima</p>
-                            <p class="text-sm text-gray-600"><strong>输出：</strong>潜在客户清单（行业+产品类型+国家/区域）</p>
-                        </div>
-                        <div class="bg-orange-50 rounded-lg p-4">
-                            <div class="font-medium text-orange-800 mb-2">🎯 目标二：客户来源（重点东南亚）</div>
-                            <p class="text-sm text-gray-600">观察友商展台客户的国别分布</p>
-                            <p class="text-sm text-gray-600"><strong>输出：</strong>条包和听装的需求市场在哪</p>
-                        </div>
-                        <div class="bg-orange-50 rounded-lg p-4">
-                            <div class="font-medium text-orange-800 mb-2">🎯 目标三：展台展示方式</div>
-                            <p class="text-sm text-gray-600">收集展台结构、动线、互动方式</p>
-                            <p class="text-sm text-gray-600"><strong>输出：</strong>展台展示思路改进建议</p>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="bg-orange-50 rounded-lg p-4">
-                            <div class="font-medium text-orange-800 mb-2">🎯 目标四：新包装趋势与样品</div>
-                            <p class="text-sm text-gray-600 mb-2">新外观设计、新应用场景、新材料</p>
-                            <p class="text-sm text-gray-600">新消费场景（便携、家庭装、单人份）</p>
-                            <p class="text-sm text-gray-600"><strong>输出：</strong>新包装趋势清单</p>
-                        </div>
-                        <div class="bg-orange-50 rounded-lg p-4">
-                            <div class="font-medium text-orange-800 mb-2">🎯 目标五：展馆布局调研</div>
-                            <p class="text-sm text-gray-600">各展馆人流密度、品牌位置与面积</p>
-                            <p class="text-sm text-gray-600"><strong>输出：</strong>推荐展位位置与规模预算</p>
-                        </div>
-                        <div class="bg-gray-50 rounded-lg p-4">
-                            <div class="font-semibold text-gray-700 mb-2">📍 推荐路线（Hall 5→14→15→16→17）</div>
-                            <p class="text-sm text-gray-600">先看食品包装(5)→模块化(14)→装盒(15)→制药(16)→IMA/Hassia(17)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. 营销部 -->
-        <section id="section-marketing" class="hidden">
-            <div class="mb-6">
-                <div class="flex items-center gap-3">
-                    <span class="text-3xl">📣</span>
-                    <h2 class="text-2xl font-bold">营销部</h2>
-                    <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">孙俊杰、李锦秀、许彩萍</span>
-                </div>
-            </div>
-
-            <!-- 孙俊杰 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-blue-200 mb-6 group-card group-marketing">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold">孙</div>
-                    <div>
-                        <h3 class="text-xl font-bold">孙俊杰</h3>
-                        <p class="text-blue-600 text-sm">市场策略与智能化方向储备</p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-semibold text-gray-700 mb-3">🎯 观展目标</h4>
-                        <div class="space-y-3">
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <div class="font-medium text-blue-800 mb-1">1. 国际先进展商对标</div>
-                                <p class="text-sm text-gray-600">IMA、Mespack、Syntegon、Marchesini、Romaco、Uhlmann</p>
-                            </div>
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <div class="font-medium text-blue-800 mb-1">2. AI技术落地进展调研</div>
-                                <p class="text-sm text-gray-600">视觉检测、预测性维护、智能排产、数字孪生、远程服务</p>
-                            </div>
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <div class="font-medium text-blue-800 mb-1">3. 参展战略与市场储备</div>
-                                <p class="text-sm text-gray-600">评估Interpack是否应成为JOYEA重点参展平台</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-semibold text-gray-700 mb-3">📋 交付成果</h4>
-                        <div class="bg-gray-50 rounded-lg p-4 text-sm space-y-2">
-                            <div class="flex items-start gap-2">
-                                <span class="text-blue-500">📄</span>
-                                <span>国际标杆展商观察与差异化机会报告</span>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="text-blue-500">🤖</span>
-                                <span>国际展商AI应用案例清单及JOYEA借鉴建议</span>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="text-blue-500">📊</span>
-                                <span>Interpack参展价值及ROI初步评估</span>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="text-blue-500">🎨</span>
-                                <span>国际展台展示形式升级参考模板</span>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="text-blue-500">📦</span>
-                                <span>新包装形式案例库（袋型/罐型）</span>
-                            </div>
-                        </div>
-                        
-                        <h4 class="font-semibold text-gray-700 mb-3 mt-4">🗺️ 重点展位</h4>
-                        <div class="grid grid-cols-2 gap-2 text-sm">
-                            <div class="bg-gray-50 rounded p-2">
-                                <span class="font-medium">IMA</span>
-                                <div class="text-xs text-gray-500">H17 A20-1~8</div>
-                            </div>
-                            <div class="bg-gray-50 rounded p-2">
-                                <span class="font-medium">Syntegon</span>
-                                <div class="text-xs text-gray-500">H6 A31/A57</div>
-                            </div>
-                            <div class="bg-gray-50 rounded p-2">
-                                <span class="font-medium">Marchesini</span>
-                                <div class="text-xs text-gray-500">H15 A42-1~6</div>
-                            </div>
-                            <div class="bg-gray-50 rounded p-2">
-                                <span class="font-medium">Romaco</span>
-                                <div class="text-xs text-gray-500">H16 D22</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 李锦秀 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-blue-200 mb-6 group-card group-marketing">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold">李</div>
-                    <div>
-                        <h3 class="text-xl font-bold">李锦秀</h3>
-                        <p class="text-blue-600 text-sm">行业趋势与制药装备技术</p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-semibold text-gray-700 mb-3">🎯 观展目标</h4>
-                        <div class="space-y-3">
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <div class="font-medium text-blue-800 mb-1">1. 行业趋势调研</div>
-                                <p class="text-sm text-gray-600">智能化包装设备、绿色环保包装工艺、可持续包材</p>
-                            </div>
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <div class="font-medium text-blue-800 mb-1">2. 药品行业技术调研</div>
-                                <p class="text-sm text-gray-600">连续制造（CM）方案、制粒/干燥设备参数、GMP合规性</p>
-                            </div>
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <div class="font-medium text-blue-800 mb-1">3. 保健品与食品包装创新</div>
-                                <p class="text-sm text-gray-600">功能型包装、便捷开启设计、个性化外观方案</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-semibold text-gray-700 mb-3">🗺️ 重点展位</h4>
-                        <div class="bg-gray-50 rounded-lg p-4 space-y-2 text-sm">
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">IMA（制药设备）</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H17</span> A20-1~8</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">OPTIMA（制药）</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H16</span> F54/F55</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Romaco（制药包装）</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H16</span> D22</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Uhlmann（制药）</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H15</span> B24</span>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-4 p-3 bg-emerald-50 rounded-lg">
-                            <p class="text-emerald-700 text-sm"><strong>建议：</strong>重点关注H16/H17制药展厅，收集连续制造方案资料</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 许彩萍 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-blue-200 group-card group-marketing">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold">许</div>
-                    <div>
-                        <h3 class="text-xl font-bold">许彩萍</h3>
-                        <p class="text-blue-600 text-sm">战略观察者与信息收集者</p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="space-y-4">
-                        <div class="bg-blue-50 rounded-lg p-4">
-                            <div class="font-medium text-blue-800 mb-2">🎯 目标一：深度技术洞察与趋势扫描</div>
-                            <p class="text-sm text-gray-600 mb-1">IIoT、机器视觉、AI过程控制、数字孪生、可持续材料</p>
-                            <p class="text-sm text-gray-600">四大行业需求（乳品/药/保健/食品）</p>
-                        </div>
-                        <div class="bg-blue-50 rounded-lg p-4">
-                            <div class="font-medium text-blue-800 mb-2">🎯 目标二：对标分析与竞争格局评估</div>
-                            <p class="text-sm text-gray-600">观察新设备、新卖点、互动演示、客户群体</p>
-                            <p class="text-sm text-gray-600">分析价值主张和展示策略</p>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="bg-blue-50 rounded-lg p-4">
-                            <div class="font-medium text-blue-800 mb-2">🎯 目标三：跨国公司客户欧洲团队需求</div>
-                            <p class="text-sm text-gray-600">请跨国公司国内团队约欧洲团队展会交流</p>
-                            <p class="text-sm text-gray-600">收集"中国供应商"真实感受</p>
-                        </div>
-                        <div class="bg-gray-50 rounded-lg p-4">
-                            <div class="font-semibold text-gray-700 mb-2">📋 交付成果</div>
-                            <p class="text-sm text-gray-600">《主要竞品动态分析与我司差异化优势巩固建议》</p>
-                            <p class="text-sm text-gray-600">《欧洲跨国公司需求洞察清单》</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. 技术部 -->
-        <section id="section-tech" class="hidden">
-            <div class="mb-6">
-                <div class="flex items-center gap-3">
-                    <span class="text-3xl">⚙️</span>
-                    <h2 class="text-2xl font-bold">技术部</h2>
-                    <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">周进军、张辉、陈鹏、王鑫灏</span>
-                </div>
-            </div>
-
-            <!-- 张辉 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-emerald-200 mb-6 group-card group-tech">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold">张</div>
-                    <div>
-                        <h3 class="text-xl font-bold">张辉</h3>
-                        <p class="text-emerald-600 text-sm">Stick条包与胶囊包装标杆调研</p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="space-y-4">
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-2">1. Stick标杆调研</div>
-                            <p class="text-sm text-gray-600">Universal、OMAG、INVPACK、Viking</p>
-                            <p class="text-sm text-gray-600">设备性能、工业设计、新技术、零件加工、人机界面</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-2">2. 软袋包装标杆</div>
-                            <p class="text-sm text-gray-600">TNA、WOLF、Syntegon</p>
-                            <p class="text-sm text-gray-600">横封新技术、超声波封口技术</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-2">3. 胶囊标杆</div>
-                            <p class="text-sm text-gray-600">OPTIMA、IMA、Syntegon、SOMIC、Richger</p>
-                            <p class="text-sm text-gray-600">动子电机与封口、切膜新技术</p>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-2">4. 装盒标杆</div>
-                            <p class="text-sm text-gray-600">ROMACO、Marchesini、CAM、KOCH、IWK、Syntegon、CAMA、Schubert</p>
-                            <p class="text-sm text-gray-600">Topload装盒技术、新盒型挖掘</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-2">5. 食品/无菌行业</div>
-                            <p class="text-sm text-gray-600">ULMA、WEBER、FUJI等</p>
-                            <p class="text-sm text-gray-600">机架、钣金、输送等细节工艺</p>
-                        </div>
-                        <h4 class="font-semibold text-gray-700">🗺️ 重点展位</h4>
-                        <div class="bg-gray-50 rounded-lg p-3 space-y-1 text-sm">
-                            <div class="flex justify-between"><span>Hassia (Stick)</span><span class="font-mono">H17 A20-5</span></div>
-                            <div class="flex justify-between"><span>IMA (胶囊/Stick)</span><span class="font-mono">H17 A20-1~8</span></div>
-                            <div class="flex justify-between"><span>Universal Pack</span><span class="font-mono">H16 B42</span></div>
-                            <div class="flex justify-between"><span>OMAG</span><span class="font-mono">H15 B20</span></div>
-                            <div class="flex justify-between"><span>SOMIC (胶囊)</span><span class="font-mono">H14 A02</span></div>
-                            <div class="flex justify-between"><span>TNA (软袋)</span><span class="font-mono">H14 C56/D56</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 陈鹏 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-emerald-200 mb-6 group-card group-tech">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold">陈</div>
-                    <div>
-                        <h3 class="text-xl font-bold">陈鹏</h3>
-                        <p class="text-emerald-600 text-sm">设备性能与工艺技术深度调研</p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="space-y-4">
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-2">1. 软袋包装机</div>
-                            <p class="text-sm text-gray-600">单通道/多通道最新技术、机构</p>
-                            <p class="text-sm text-gray-600">核心参数：速度、精度、占地</p>
-                            <p class="text-sm text-gray-600"><strong>输出：</strong>标杆对比表、部件图片视频</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-2">2. 灭菌行业</div>
-                            <p class="text-sm text-gray-600">Scholz灭菌柜/杀菌釜设备及工艺流程</p>
-                            <p class="text-sm text-gray-600"><strong>输出：</strong>灭菌工艺流程图、对比照片</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-2">3. 机器人</div>
-                            <p class="text-sm text-gray-600">人形AI机器人、应用场景</p>
-                            <p class="text-sm text-gray-600"><strong>输出：</strong>机器人品牌参数对比表</p>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-2">4. 听装</div>
-                            <p class="text-sm text-gray-600">充填机、圆帽盖机、封罐机标杆</p>
-                            <p class="text-sm text-gray-600">新机构、最新单机/整线参数</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-2">5. 其它</div>
-                            <p class="text-sm text-gray-600">食品加工设备（巧克力线等）</p>
-                            <p class="text-sm text-gray-600">新塑料薄膜材料/袋子样袋收集</p>
-                        </div>
-                        <h4 class="font-semibold text-gray-700">🗺️ 重点展位</h4>
-                        <div class="bg-gray-50 rounded-lg p-3 space-y-1 text-sm">
-                            <div class="flex justify-between"><span>Syntegon (软袋)</span><span class="font-mono">H6 A31/A57</span></div>
-                            <div class="flex justify-between"><span>Mespack (软袋)</span><span class="font-mono">H6 B73</span></div>
-                            <div class="flex justify-between"><span>WOLF (软袋)</span><span class="font-mono">H6 C31</span></div>
-                            <div class="flex justify-between"><span>Scholz (灭菌)</span><span class="font-mono">H5 D41</span></div>
-                            <div class="flex justify-between"><span>Stemmer Imaging</span><span class="font-mono">H18B C23</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 王鑫灏 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-emerald-200 mb-6 group-card group-tech">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold">王</div>
-                    <div>
-                        <h3 class="text-xl font-bold">王鑫灏</h3>
-                        <p class="text-emerald-600 text-sm">控制技术与数字化升级</p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="space-y-3">
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-1">1. 最新控制技术</div>
-                            <p class="text-sm text-gray-600">PLC、运动控制、PC、HMI、温控等</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-1">2. 智能检测技术</div>
-                            <p class="text-sm text-gray-600">视觉检测、设备诊断；寻找优秀供应商</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-1">3. 数字化技术发展</div>
-                            <p class="text-sm text-gray-600">数字孪生、AI检测、预测性维护、SCADA</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-1">4. 电气安装标杆</div>
-                            <p class="text-sm text-gray-600">布线布管、安全系统；传感器应用</p>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-gray-700 mb-3">🗺️ 重点展位</h4>
-                        <div class="bg-gray-50 rounded-lg p-4 space-y-2 text-sm">
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Bosch Rexroth（控制）</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H6</span> <span class="font-mono">A42</span></span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">GEA（加工）</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H17</span> <span class="font-mono">B72</span></span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">Syntegon（数字化）</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H6</span> <span class="font-mono">A31/A57</span></span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">IMA（整线）</span>
-                                <span class="text-xs"><span class="hall-tag hall-highlight">H17</span> <span class="font-mono">A20-1~8</span></span>
-                            </div>
-                        </div>
-                        <h4 class="font-semibold text-gray-700 mb-3 mt-4">🔧 关注技术模块</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs">控制系统</span>
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs">执行/传感/配电/驱动</span>
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs">工业数字化</span>
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs">视觉与智能诊断</span>
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs">绘图软件</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 周进军 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-emerald-200 group-card group-tech">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold">周</div>
-                    <div>
-                        <h3 class="text-xl font-bold">周进军</h3>
-                        <p class="text-emerald-600 text-sm">技术创新与合作伙伴寻源</p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="space-y-3">
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-1">1. 竞品分析</div>
-                            <p class="text-sm text-gray-600">新包装形式/技术/设备/工业设计</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-1">2. 合作伙伴寻源</div>
-                            <p class="text-sm text-gray-600">寻找配套合作伙伴</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-1">3. 特定问题解决方案</div>
-                            <p class="text-sm text-gray-600">无菌灌装、粉剂处理、充填技术、灭菌技术</p>
-                        </div>
-                        <div class="bg-emerald-50 rounded-lg p-4">
-                            <div class="font-medium text-emerald-800 mb-1">4. 智能化/数字化技术</div>
-                            <p class="text-sm text-gray-600">产线应用及发展趋势</p>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-gray-700 mb-3">🗺️ 重点展位（按主题）</h4>
-                        <div class="bg-gray-50 rounded-lg p-4 text-sm space-y-3">
-                            <div>
-                                <div class="font-medium text-emerald-700 mb-1">无菌/灭菌</div>
-                                <div class="flex gap-2 flex-wrap">
-                                    <span class="font-mono text-xs bg-white px-2 py-1 rounded">H5 D41 Scholz</span>
-                                    <span class="font-mono text-xs bg-white px-2 py-1 rounded">H5 A05 Fuji</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-medium text-emerald-700 mb-1">粉剂/前处理</div>
-                                <div class="flex gap-2 flex-wrap">
-                                    <span class="font-mono text-xs bg-white px-2 py-1 rounded">H17 GEA</span>
-                                    <span class="font-mono text-xs bg-white px-2 py-1 rounded">H6 GEA Food</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-medium text-emerald-700 mb-1">智能化/数字化</div>
-                                <div class="flex gap-2 flex-wrap">
-                                    <span class="font-mono text-xs bg-white px-2 py-1 rounded">H6 Syntegon</span>
-                                    <span class="font-mono text-xs bg-white px-2 py-1 rounded">H18B Stemmer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. 战促部 -->
-        <section id="section-strategy" class="hidden">
-            <div class="mb-6">
-                <div class="flex items-center gap-3">
-                    <span class="text-3xl">🎯</span>
-                    <h2 class="text-2xl font-bold">战促部</h2>
-                    <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm">王翠萍</span>
-                </div>
-            </div>
-
-            <!-- 王翠萍 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-orange-200 mb-6 group-card group-strategy">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-bold">王</div>
-                    <div>
-                        <h3 class="text-xl font-bold">王翠萍</h3>
-                        <p class="text-orange-600 text-sm">战略促进中心 · 技术趋势与人才观察</p>
-                    </div>
-                </div>
-                
-                <div class="space-y-4">
-                    <div class="bg-orange-50 rounded-lg p-4">
-                        <div class="font-semibold text-orange-800 mb-3">一、学习和了解未来3-5年技术方向</div>
-                        <div class="space-y-3">
-                            <div class="bg-white rounded-lg p-4">
-                                <div class="font-medium text-orange-700 mb-2">1. 智能化与自动化</div>
-                                <p class="text-sm text-gray-600">重点关注AI驱动的柔性制造、数字孪生、智能软件定义工厂等前沿方案，学习如何将AI视觉检测系统等融入定制化机械的解决方案中。</p>
-                            </div>
-                            <div class="bg-white rounded-lg p-4">
-                                <div class="font-medium text-orange-700 mb-2">2. 可持续性与循环经济</div>
-                                <p class="text-sm text-gray-600">关注欧盟《包装及包装废弃物法规》（PPWR）带来的机遇与挑战。</p>
-                            </div>
-                            <div class="bg-white rounded-lg p-4">
-                                <div class="font-medium text-orange-700 mb-2">3. 柔性化与模块化</div>
-                                <p class="text-sm text-gray-600">重点了解能实现"快速切换"、"开放式架构"等柔性的模块化设计。</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-orange-50 rounded-lg p-4">
-                        <div class="font-semibold text-orange-800 mb-3">二、重点关注企业与展品</div>
-                        <p class="text-sm text-gray-600 mb-3">如克朗斯（Krones）的未来包装、西得乐（Sidel）的智能化产线、马尔凯西尼（Marchesini）的单一材料及AI清场系统、Milliken的聚合物添加剂等，了解其原理、核心优势及思考与自身业务的结合点。</p>
-                    </div>
-
-                    <div class="bg-orange-50 rounded-lg p-4">
-                        <div class="font-semibold text-orange-800 mb-3">三、利用展会接触海外人才</div>
-                        <p class="text-sm text-gray-600">如果看到了潜在的海外研发或技术人才，可以主动交流。</p>
-                    </div>
-
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <div class="font-semibold text-gray-700 mb-2">🗺️ 重点展位</div>
-                        <div class="flex gap-2 flex-wrap">
-                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H1 Krones</span>
-                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H2 Sidel</span>
-                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H16 Marchesini</span>
-                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H6 Syntegon</span>
-                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H3 IMA</span>
-                            <span class="font-mono text-xs bg-white px-2 py-1 rounded">H4 GEA</span>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </section>
-
-        <!-- 8. 复盘机制 -->
-        <section id="section-review" class="hidden">
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-6">
-                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <span>🔄</span> 每日复盘机制
-                </h2>
-                
-                <div class="success-box rounded-xl p-5 mb-6">
-                    <h3 class="font-bold text-emerald-800 mb-2 flex items-center gap-2">
-                        <span>⏰</span> 复盘时间：每日晚饭时间 19:00-21:00
-                    </h3>
-                    <p class="text-emerald-700 text-sm">全体观展成员参与，轮流分享当日收获与发现</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-semibold text-gray-700 mb-3">📝 复盘内容</h4>
-                        <div class="space-y-3">
-                            <div class="flex gap-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-sm font-bold flex-shrink-0">1</div>
-                                <div>
-                                    <div class="font-medium text-sm">今日完成情况</div>
-                                    <p class="text-gray-500 text-xs">去了哪些展位？达成了哪些目标？收集到哪些信息/样品？</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-sm font-bold flex-shrink-0">2</div>
-                                <div>
-                                    <div class="font-medium text-sm">待办事项跟进</div>
-                                    <p class="text-gray-500 text-xs">昨日未完成事项进展，明日重点跟进事项</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-sm font-bold flex-shrink-0">3</div>
-                                <div>
-                                    <div class="font-medium text-sm">经验分享</div>
-                                    <p class="text-gray-500 text-xs">值得借鉴的展示方式、竞争对手新动向、新合作机会</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-sm font-bold flex-shrink-0">4</div>
-                                <div>
-                                    <div class="font-medium text-sm">明日计划</div>
-                                    <p class="text-gray-500 text-xs">重点参观展位、需要关注的技术/产品、需补充收集的信息</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-semibold text-gray-700 mb-3">📋 每日复盘记录表</h4>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-sm border-collapse">
-                                <thead>
-                                    <tr class="bg-gray-100">
-                                        <th class="border p-2 text-left">日期</th>
-                                        <th class="border p-2 text-left">姓名</th>
-                                        <th class="border p-2 text-left">今日完成</th>
-                                        <th class="border p-2 text-left">明日计划</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="border p-2">5月7日</td><td class="border p-2"></td><td class="border p-2"></td><td class="border p-2"></td></tr>
-                                    <tr><td class="border p-2">5月8日</td><td class="border p-2"></td><td class="border p-2"></td><td class="border p-2"></td></tr>
-                                    <tr><td class="border p-2">5月9日</td><td class="border p-2"></td><td class="border p-2"></td><td class="border p-2"></td></tr>
-                                    <tr><td class="border p-2">5月10日</td><td class="border p-2"></td><td class="border p-2"></td><td class="border p-2"></td></tr>
-                                    <tr><td class="border p-2">5月11日</td><td class="border p-2"></td><td class="border p-2"></td><td class="border p-2"></td></tr>
-                                    <tr><td class="border p-2">5月12日</td><td class="border p-2"></td><td class="border p-2"></td><td class="border p-2"></td></tr>
-                                    <tr><td class="border p-2">5月13日</td><td class="border p-2"></td><td class="border p-2"></td><td class="border p-2"></td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 总体复盘 -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-6">
-                <h3 class="font-bold text-lg mb-4">📊 总体复盘总结（5月13日晚）</h3>
-                
-                <h4 class="font-semibold text-gray-700 mb-3">成果汇总</h4>
-                <div class="overflow-x-auto mb-6">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="bg-gray-50">
-                                <th class="border p-2 text-left">分类</th>
-                                <th class="border p-2 text-left">成果</th>
-                                <th class="border p-2 text-left">负责人</th>
-                                <th class="border p-2 text-center">状态</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td class="border p-2">国际业务</td><td class="border p-2">国际标杆展商观察报告</td><td class="border p-2">陈锋/岳锦涛</td><td class="border p-2 text-center"><span class="status-pending">待完成</span></td></tr>
-                            <tr><td class="border p-2">国际业务</td><td class="border p-2">潜在客户清单（东南亚市场）</td><td class="border p-2">岳锦涛</td><td class="border p-2 text-center"><span class="status-pending">待完成</span></td></tr>
-                            <tr><td class="border p-2">营销</td><td class="border p-2">AI应用案例清单</td><td class="border p-2">孙俊杰</td><td class="border p-2 text-center"><span class="status-pending">待完成</span></td></tr>
-                            <tr><td class="border p-2">营销</td><td class="border p-2">Interpack参展价值评估</td><td class="border p-2">孙俊杰</td><td class="border p-2 text-center"><span class="status-pending">待完成</span></td></tr>
-                            <tr><td class="border p-2">营销</td><td class="border p-2">竞品动态分析报告</td><td class="border p-2">许彩萍</td><td class="border p-2 text-center"><span class="status-pending">待完成</span></td></tr>
-                            <tr><td class="border p-2">营销</td><td class="border p-2">制药装备调研报告</td><td class="border p-2">李锦秀</td><td class="border p-2 text-center"><span class="status-pending">待完成</span></td></tr>
-                            <tr><td class="border p-2">技术</td><td class="border p-2">标杆设备对比表</td><td class="border p-2">张辉</td><td class="border p-2 text-center"><span class="status-pending">待完成</span></td></tr>
-                            <tr><td class="border p-2">技术</td><td class="border p-2">灭菌工艺流程图</td><td class="border p-2">陈鹏</td><td class="border p-2 text-center"><span class="status-pending">待完成</span></td></tr>
-                            <tr><td class="border p-2">技术</td><td class="border p-2">机器人参数对比表</td><td class="border p-2">陈鹏</td><td class="border p-2 text-center"><span class="status-pending">待完成</span></td></tr>
-                            <tr><td class="border p-2">技术</td><td class="border p-2">控制技术调研报告</td><td class="border p-2">王鑫灏</td><td class="border p-2 text-center"><span class="status-pending">待完成</span></td></tr>
-                            <tr><td class="border p-2">技术</td><td class="border p-2">数字化技术分析报告</td><td class="border p-2">王鑫灏</td><td class="border p-2 text-center"><span class="status-pending">待完成</span></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h4 class="font-semibold text-gray-700 mb-3">后续行动计划</h4>
-                <div class="bg-gray-50 rounded-lg p-4 text-sm">
-                    <textarea class="w-full h-32 bg-white border rounded p-2" placeholder="展后跟进事项..."></textarea>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- 8. 展馆地图 -->
-        <section id="section-maps" class="hidden">
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-                <h2 class="text-xl font-bold text-gray-800 mb-1 flex items-center gap-2">
-                    <span class="text-2xl">🗺️</span> 展馆平面地图
-                </h2>
-                <p class="text-sm text-gray-500">共 25 个展馆 · 130 页 · 点击图片可放大查看</p>
-            </div>
-
-            <!-- 使用说明 -->
-            <div class="info-box rounded-xl p-4 mb-6 text-sm text-gray-700">
-                💡 点击左侧展馆名称切换 · 图片支持捏合缩放 · 点击图片全屏查看
-            </div>
-
-            <div class="flex flex-col lg:flex-row gap-6">
-                <!-- 左侧展馆导航 -->
-                <div id="hall-nav-sidebar" class="lg:w-48 flex-shrink-0">
-                    <div id="hall-nav-sticky" class="bg-white rounded-xl shadow-sm border border-gray-100 p-3 sticky top-20">
-                        <p id="hall-nav-label" class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3 px-1">选择展馆</p>
-                        <div id="hall-nav-list" class="flex flex-col gap-1.5 max-h-screen overflow-y-auto lg:max-h-[80vh]">
-                            <button 
-            onclick="switchHall('ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-primary-600 text-white border border-gray-200"
-        >全场总览图</button>
-<button 
-            onclick="switchHall('EN1', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >展馆入口图 (EN1)</button>
-<button 
-            onclick="switchHall('ENB', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >展馆入口图 (ENB)</button>
-<button 
-            onclick="switchHall('Halle1', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >1号馆</button>
-<button 
-            onclick="switchHall('Halle3', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >3号馆</button>
-<button 
-            onclick="switchHall('Halle4', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >4号馆</button>
-<button 
-            onclick="switchHall('Halle5', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >5号馆</button>
-<button 
-            onclick="switchHall('Halle6', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >6号馆</button>
-<button 
-            onclick="switchHall('Halle7', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >7号馆</button>
-<button 
-            onclick="switchHall('Halle7_1', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >7.1号馆</button>
-<button 
-            onclick="switchHall('Halle7_2', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >7.2号馆</button>
-<button 
-            onclick="switchHall('Halle7A', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >7A号馆</button>
-<button 
-            onclick="switchHall('Halle8A', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >8A号馆</button>
-<button 
-            onclick="switchHall('Halle8B', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >8B号馆</button>
-<button 
-            onclick="switchHall('Halle9', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >9号馆</button>
-<button 
-            onclick="switchHall('Halle10', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >10号馆</button>
-<button 
-            onclick="switchHall('Halle11', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >11号馆</button>
-<button 
-            onclick="switchHall('Halle12', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >12号馆</button>
-<button 
-            onclick="switchHall('Halle13', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >13号馆</button>
-<button 
-            onclick="switchHall('Halle14', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >14号馆</button>
-<button 
-            onclick="switchHall('Halle15', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >15号馆</button>
-<button 
-            onclick="switchHall('Halle16', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >16号馆</button>
-<button 
-            onclick="switchHall('Halle17', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >17号馆</button>
-<button 
-            onclick="switchHall('Halle18A', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >18A号馆</button>
-<button 
-            onclick="switchHall('Halle18B', this)"
-            class="hall-nav-btn text-left px-3 py-2 rounded-lg text-sm font-medium transition bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-        >18B号馆</button>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 右侧图片区域 -->
-                <div class="flex-1 min-w-0">
-                    <div id="hall-ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">全场总览图</h3>
-            <span class="text-sm text-gray-500">1 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view.webp" 
-                src="maps_thumb/ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="全场总览图"
-                onclick="openLightbox('maps/ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view.png')"
-                style="max-width:100%;"
-            >
-        </div>
+    <div class="footer">
+        仅一联合智造 JOYEA · 展馆地图便携版
     </div>
-<div id="hall-EN1" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">展馆入口图 (EN1)</h3>
-            <span class="text-sm text-gray-500">3 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/EN1_p1.webp" 
-                src="maps_thumb/EN1_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="展馆入口图 (EN1)"
-                onclick="openLightbox('maps/EN1_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/EN1_p2.webp" 
-                src="maps_thumb/EN1_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="展馆入口图 (EN1)"
-                onclick="openLightbox('maps/EN1_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/EN1_p3.webp" 
-                src="maps_thumb/EN1_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="展馆入口图 (EN1)"
-                onclick="openLightbox('maps/EN1_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-ENB" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">展馆入口图 (ENB)</h3>
-            <span class="text-sm text-gray-500">3 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/ENB_p1.webp" 
-                src="maps_thumb/ENB_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="展馆入口图 (ENB)"
-                onclick="openLightbox('maps/ENB_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/ENB_p2.webp" 
-                src="maps_thumb/ENB_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="展馆入口图 (ENB)"
-                onclick="openLightbox('maps/ENB_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/ENB_p3.webp" 
-                src="maps_thumb/ENB_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="展馆入口图 (ENB)"
-                onclick="openLightbox('maps/ENB_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle1" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">1号馆</h3>
-            <span class="text-sm text-gray-500">5 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle1_p1.webp" 
-                src="maps_thumb/Halle1_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="1号馆"
-                onclick="openLightbox('maps/Halle1_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle1_p2.webp" 
-                src="maps_thumb/Halle1_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="1号馆"
-                onclick="openLightbox('maps/Halle1_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle1_p3.webp" 
-                src="maps_thumb/Halle1_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="1号馆"
-                onclick="openLightbox('maps/Halle1_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle1_p4.webp" 
-                src="maps_thumb/Halle1_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="1号馆"
-                onclick="openLightbox('maps/Halle1_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle1_p5.webp" 
-                src="maps_thumb/Halle1_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="1号馆"
-                onclick="openLightbox('maps/Halle1_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle3" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">3号馆</h3>
-            <span class="text-sm text-gray-500">6 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle3_p1.webp" 
-                src="maps_thumb/Halle3_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="3号馆"
-                onclick="openLightbox('maps/Halle3_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle3_p2.webp" 
-                src="maps_thumb/Halle3_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="3号馆"
-                onclick="openLightbox('maps/Halle3_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle3_p3.webp" 
-                src="maps_thumb/Halle3_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="3号馆"
-                onclick="openLightbox('maps/Halle3_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle3_p4.webp" 
-                src="maps_thumb/Halle3_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="3号馆"
-                onclick="openLightbox('maps/Halle3_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle3_p5.webp" 
-                src="maps_thumb/Halle3_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="3号馆"
-                onclick="openLightbox('maps/Halle3_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle3_p6.webp" 
-                src="maps_thumb/Halle3_p6.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="3号馆"
-                onclick="openLightbox('maps/Halle3_p6.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle4" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">4号馆</h3>
-            <span class="text-sm text-gray-500">6 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle4_p1.webp" 
-                src="maps_thumb/Halle4_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="4号馆"
-                onclick="openLightbox('maps/Halle4_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle4_p2.webp" 
-                src="maps_thumb/Halle4_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="4号馆"
-                onclick="openLightbox('maps/Halle4_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle4_p3.webp" 
-                src="maps_thumb/Halle4_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="4号馆"
-                onclick="openLightbox('maps/Halle4_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle4_p4.webp" 
-                src="maps_thumb/Halle4_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="4号馆"
-                onclick="openLightbox('maps/Halle4_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle4_p5.webp" 
-                src="maps_thumb/Halle4_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="4号馆"
-                onclick="openLightbox('maps/Halle4_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle4_p6.webp" 
-                src="maps_thumb/Halle4_p6.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="4号馆"
-                onclick="openLightbox('maps/Halle4_p6.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle5" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">5号馆</h3>
-            <span class="text-sm text-gray-500">4 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle5_p1.webp" 
-                src="maps_thumb/Halle5_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="5号馆"
-                onclick="openLightbox('maps/Halle5_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle5_p2.webp" 
-                src="maps_thumb/Halle5_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="5号馆"
-                onclick="openLightbox('maps/Halle5_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle5_p3.webp" 
-                src="maps_thumb/Halle5_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="5号馆"
-                onclick="openLightbox('maps/Halle5_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle5_p4.webp" 
-                src="maps_thumb/Halle5_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="5号馆"
-                onclick="openLightbox('maps/Halle5_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle6" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">6号馆</h3>
-            <span class="text-sm text-gray-500">6 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle6_p1.webp" 
-                src="maps_thumb/Halle6_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="6号馆"
-                onclick="openLightbox('maps/Halle6_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle6_p2.webp" 
-                src="maps_thumb/Halle6_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="6号馆"
-                onclick="openLightbox('maps/Halle6_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle6_p3.webp" 
-                src="maps_thumb/Halle6_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="6号馆"
-                onclick="openLightbox('maps/Halle6_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle6_p4.webp" 
-                src="maps_thumb/Halle6_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="6号馆"
-                onclick="openLightbox('maps/Halle6_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle6_p5.webp" 
-                src="maps_thumb/Halle6_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="6号馆"
-                onclick="openLightbox('maps/Halle6_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle6_p6.webp" 
-                src="maps_thumb/Halle6_p6.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="6号馆"
-                onclick="openLightbox('maps/Halle6_p6.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle7" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">7号馆</h3>
-            <span class="text-sm text-gray-500">3 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7_p1.webp" 
-                src="maps_thumb/Halle7_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7号馆"
-                onclick="openLightbox('maps/Halle7_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7_p2.webp" 
-                src="maps_thumb/Halle7_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7号馆"
-                onclick="openLightbox('maps/Halle7_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7_p3.webp" 
-                src="maps_thumb/Halle7_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7号馆"
-                onclick="openLightbox('maps/Halle7_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle7_1" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">7.1号馆</h3>
-            <span class="text-sm text-gray-500">7 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.1_p1.webp" 
-                src="maps_thumb/Halle7.1_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.1号馆"
-                onclick="openLightbox('maps/Halle7.1_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.1_p2.webp" 
-                src="maps_thumb/Halle7.1_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.1号馆"
-                onclick="openLightbox('maps/Halle7.1_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.1_p3.webp" 
-                src="maps_thumb/Halle7.1_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.1号馆"
-                onclick="openLightbox('maps/Halle7.1_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.1_p4.webp" 
-                src="maps_thumb/Halle7.1_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.1号馆"
-                onclick="openLightbox('maps/Halle7.1_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.1_p5.webp" 
-                src="maps_thumb/Halle7.1_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.1号馆"
-                onclick="openLightbox('maps/Halle7.1_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.1_p6.webp" 
-                src="maps_thumb/Halle7.1_p6.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.1号馆"
-                onclick="openLightbox('maps/Halle7.1_p6.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.1_p7.webp" 
-                src="maps_thumb/Halle7.1_p7.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.1号馆"
-                onclick="openLightbox('maps/Halle7.1_p7.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle7_2" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">7.2号馆</h3>
-            <span class="text-sm text-gray-500">10 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.2_p1.webp" 
-                src="maps_thumb/Halle7.2_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.2号馆"
-                onclick="openLightbox('maps/Halle7.2_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.2_p2.webp" 
-                src="maps_thumb/Halle7.2_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.2号馆"
-                onclick="openLightbox('maps/Halle7.2_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.2_p3.webp" 
-                src="maps_thumb/Halle7.2_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.2号馆"
-                onclick="openLightbox('maps/Halle7.2_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.2_p4.webp" 
-                src="maps_thumb/Halle7.2_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.2号馆"
-                onclick="openLightbox('maps/Halle7.2_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.2_p5.webp" 
-                src="maps_thumb/Halle7.2_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.2号馆"
-                onclick="openLightbox('maps/Halle7.2_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.2_p6.webp" 
-                src="maps_thumb/Halle7.2_p6.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.2号馆"
-                onclick="openLightbox('maps/Halle7.2_p6.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.2_p7.webp" 
-                src="maps_thumb/Halle7.2_p7.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.2号馆"
-                onclick="openLightbox('maps/Halle7.2_p7.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.2_p8.webp" 
-                src="maps_thumb/Halle7.2_p8.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.2号馆"
-                onclick="openLightbox('maps/Halle7.2_p8.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.2_p9.webp" 
-                src="maps_thumb/Halle7.2_p9.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.2号馆"
-                onclick="openLightbox('maps/Halle7.2_p9.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7.2_p10.webp" 
-                src="maps_thumb/Halle7.2_p10.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7.2号馆"
-                onclick="openLightbox('maps/Halle7.2_p10.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle7A" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">7A号馆</h3>
-            <span class="text-sm text-gray-500">5 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7A_p1.webp" 
-                src="maps_thumb/Halle7A_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7A号馆"
-                onclick="openLightbox('maps/Halle7A_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7A_p2.webp" 
-                src="maps_thumb/Halle7A_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7A号馆"
-                onclick="openLightbox('maps/Halle7A_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7A_p3.webp" 
-                src="maps_thumb/Halle7A_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7A号馆"
-                onclick="openLightbox('maps/Halle7A_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7A_p4.webp" 
-                src="maps_thumb/Halle7A_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7A号馆"
-                onclick="openLightbox('maps/Halle7A_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle7A_p5.webp" 
-                src="maps_thumb/Halle7A_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="7A号馆"
-                onclick="openLightbox('maps/Halle7A_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle8A" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">8A号馆</h3>
-            <span class="text-sm text-gray-500">7 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8A_p1.webp" 
-                src="maps_thumb/Halle8A_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8A号馆"
-                onclick="openLightbox('maps/Halle8A_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8A_p2.webp" 
-                src="maps_thumb/Halle8A_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8A号馆"
-                onclick="openLightbox('maps/Halle8A_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8A_p3.webp" 
-                src="maps_thumb/Halle8A_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8A号馆"
-                onclick="openLightbox('maps/Halle8A_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8A_p4.webp" 
-                src="maps_thumb/Halle8A_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8A号馆"
-                onclick="openLightbox('maps/Halle8A_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8A_p5.webp" 
-                src="maps_thumb/Halle8A_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8A号馆"
-                onclick="openLightbox('maps/Halle8A_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8A_p6.webp" 
-                src="maps_thumb/Halle8A_p6.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8A号馆"
-                onclick="openLightbox('maps/Halle8A_p6.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8A_p7.webp" 
-                src="maps_thumb/Halle8A_p7.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8A号馆"
-                onclick="openLightbox('maps/Halle8A_p7.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle8B" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">8B号馆</h3>
-            <span class="text-sm text-gray-500">10 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8B_p1.webp" 
-                src="maps_thumb/Halle8B_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8B号馆"
-                onclick="openLightbox('maps/Halle8B_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8B_p2.webp" 
-                src="maps_thumb/Halle8B_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8B号馆"
-                onclick="openLightbox('maps/Halle8B_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8B_p3.webp" 
-                src="maps_thumb/Halle8B_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8B号馆"
-                onclick="openLightbox('maps/Halle8B_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8B_p4.webp" 
-                src="maps_thumb/Halle8B_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8B号馆"
-                onclick="openLightbox('maps/Halle8B_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8B_p5.webp" 
-                src="maps_thumb/Halle8B_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8B号馆"
-                onclick="openLightbox('maps/Halle8B_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8B_p6.webp" 
-                src="maps_thumb/Halle8B_p6.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8B号馆"
-                onclick="openLightbox('maps/Halle8B_p6.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8B_p7.webp" 
-                src="maps_thumb/Halle8B_p7.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8B号馆"
-                onclick="openLightbox('maps/Halle8B_p7.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8B_p8.webp" 
-                src="maps_thumb/Halle8B_p8.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8B号馆"
-                onclick="openLightbox('maps/Halle8B_p8.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8B_p9.webp" 
-                src="maps_thumb/Halle8B_p9.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8B号馆"
-                onclick="openLightbox('maps/Halle8B_p9.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle8B_p10.webp" 
-                src="maps_thumb/Halle8B_p10.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="8B号馆"
-                onclick="openLightbox('maps/Halle8B_p10.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle9" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">9号馆</h3>
-            <span class="text-sm text-gray-500">7 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle9_p1.webp" 
-                src="maps_thumb/Halle9_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="9号馆"
-                onclick="openLightbox('maps/Halle9_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle9_p2.webp" 
-                src="maps_thumb/Halle9_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="9号馆"
-                onclick="openLightbox('maps/Halle9_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle9_p3.webp" 
-                src="maps_thumb/Halle9_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="9号馆"
-                onclick="openLightbox('maps/Halle9_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle9_p4.webp" 
-                src="maps_thumb/Halle9_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="9号馆"
-                onclick="openLightbox('maps/Halle9_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle9_p5.webp" 
-                src="maps_thumb/Halle9_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="9号馆"
-                onclick="openLightbox('maps/Halle9_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle9_p6.webp" 
-                src="maps_thumb/Halle9_p6.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="9号馆"
-                onclick="openLightbox('maps/Halle9_p6.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle9_p7.webp" 
-                src="maps_thumb/Halle9_p7.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="9号馆"
-                onclick="openLightbox('maps/Halle9_p7.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle10" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">10号馆</h3>
-            <span class="text-sm text-gray-500">7 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle10_p1.webp" 
-                src="maps_thumb/Halle10_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="10号馆"
-                onclick="openLightbox('maps/Halle10_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle10_p2.webp" 
-                src="maps_thumb/Halle10_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="10号馆"
-                onclick="openLightbox('maps/Halle10_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle10_p3.webp" 
-                src="maps_thumb/Halle10_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="10号馆"
-                onclick="openLightbox('maps/Halle10_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle10_p4.webp" 
-                src="maps_thumb/Halle10_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="10号馆"
-                onclick="openLightbox('maps/Halle10_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle10_p5.webp" 
-                src="maps_thumb/Halle10_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="10号馆"
-                onclick="openLightbox('maps/Halle10_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle10_p6.webp" 
-                src="maps_thumb/Halle10_p6.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="10号馆"
-                onclick="openLightbox('maps/Halle10_p6.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle10_p7.webp" 
-                src="maps_thumb/Halle10_p7.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="10号馆"
-                onclick="openLightbox('maps/Halle10_p7.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle11" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">11号馆</h3>
-            <span class="text-sm text-gray-500">6 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle11_p1.webp" 
-                src="maps_thumb/Halle11_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="11号馆"
-                onclick="openLightbox('maps/Halle11_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle11_p2.webp" 
-                src="maps_thumb/Halle11_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="11号馆"
-                onclick="openLightbox('maps/Halle11_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle11_p3.webp" 
-                src="maps_thumb/Halle11_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="11号馆"
-                onclick="openLightbox('maps/Halle11_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle11_p4.webp" 
-                src="maps_thumb/Halle11_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="11号馆"
-                onclick="openLightbox('maps/Halle11_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle11_p5.webp" 
-                src="maps_thumb/Halle11_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="11号馆"
-                onclick="openLightbox('maps/Halle11_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle11_p6.webp" 
-                src="maps_thumb/Halle11_p6.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="11号馆"
-                onclick="openLightbox('maps/Halle11_p6.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle12" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">12号馆</h3>
-            <span class="text-sm text-gray-500">5 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle12_p1.webp" 
-                src="maps_thumb/Halle12_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="12号馆"
-                onclick="openLightbox('maps/Halle12_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle12_p2.webp" 
-                src="maps_thumb/Halle12_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="12号馆"
-                onclick="openLightbox('maps/Halle12_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle12_p3.webp" 
-                src="maps_thumb/Halle12_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="12号馆"
-                onclick="openLightbox('maps/Halle12_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle12_p4.webp" 
-                src="maps_thumb/Halle12_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="12号馆"
-                onclick="openLightbox('maps/Halle12_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle12_p5.webp" 
-                src="maps_thumb/Halle12_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="12号馆"
-                onclick="openLightbox('maps/Halle12_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle13" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">13号馆</h3>
-            <span class="text-sm text-gray-500">5 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle13_p1.webp" 
-                src="maps_thumb/Halle13_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="13号馆"
-                onclick="openLightbox('maps/Halle13_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle13_p2.webp" 
-                src="maps_thumb/Halle13_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="13号馆"
-                onclick="openLightbox('maps/Halle13_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle13_p3.webp" 
-                src="maps_thumb/Halle13_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="13号馆"
-                onclick="openLightbox('maps/Halle13_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle13_p4.webp" 
-                src="maps_thumb/Halle13_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="13号馆"
-                onclick="openLightbox('maps/Halle13_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle13_p5.webp" 
-                src="maps_thumb/Halle13_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="13号馆"
-                onclick="openLightbox('maps/Halle13_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle14" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">14号馆</h3>
-            <span class="text-sm text-gray-500">4 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle14_p1.webp" 
-                src="maps_thumb/Halle14_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="14号馆"
-                onclick="openLightbox('maps/Halle14_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle14_p2.webp" 
-                src="maps_thumb/Halle14_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="14号馆"
-                onclick="openLightbox('maps/Halle14_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle14_p3.webp" 
-                src="maps_thumb/Halle14_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="14号馆"
-                onclick="openLightbox('maps/Halle14_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle14_p4.webp" 
-                src="maps_thumb/Halle14_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="14号馆"
-                onclick="openLightbox('maps/Halle14_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle15" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">15号馆</h3>
-            <span class="text-sm text-gray-500">6 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle15_p1.webp" 
-                src="maps_thumb/Halle15_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="15号馆"
-                onclick="openLightbox('maps/Halle15_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle15_p2.webp" 
-                src="maps_thumb/Halle15_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="15号馆"
-                onclick="openLightbox('maps/Halle15_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle15_p3.webp" 
-                src="maps_thumb/Halle15_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="15号馆"
-                onclick="openLightbox('maps/Halle15_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle15_p4.webp" 
-                src="maps_thumb/Halle15_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="15号馆"
-                onclick="openLightbox('maps/Halle15_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle15_p5.webp" 
-                src="maps_thumb/Halle15_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="15号馆"
-                onclick="openLightbox('maps/Halle15_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle15_p6.webp" 
-                src="maps_thumb/Halle15_p6.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="15号馆"
-                onclick="openLightbox('maps/Halle15_p6.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle16" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">16号馆</h3>
-            <span class="text-sm text-gray-500">5 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle16_p1.webp" 
-                src="maps_thumb/Halle16_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="16号馆"
-                onclick="openLightbox('maps/Halle16_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle16_p2.webp" 
-                src="maps_thumb/Halle16_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="16号馆"
-                onclick="openLightbox('maps/Halle16_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle16_p3.webp" 
-                src="maps_thumb/Halle16_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="16号馆"
-                onclick="openLightbox('maps/Halle16_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle16_p4.webp" 
-                src="maps_thumb/Halle16_p4.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="16号馆"
-                onclick="openLightbox('maps/Halle16_p4.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle16_p5.webp" 
-                src="maps_thumb/Halle16_p5.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="16号馆"
-                onclick="openLightbox('maps/Halle16_p5.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle17" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">17号馆</h3>
-            <span class="text-sm text-gray-500">3 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle17_p1.webp" 
-                src="maps_thumb/Halle17_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="17号馆"
-                onclick="openLightbox('maps/Halle17_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle17_p2.webp" 
-                src="maps_thumb/Halle17_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="17号馆"
-                onclick="openLightbox('maps/Halle17_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle17_p3.webp" 
-                src="maps_thumb/Halle17_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="17号馆"
-                onclick="openLightbox('maps/Halle17_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle18A" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">18A号馆</h3>
-            <span class="text-sm text-gray-500">3 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle18A_p1.webp" 
-                src="maps_thumb/Halle18A_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="18A号馆"
-                onclick="openLightbox('maps/Halle18A_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle18A_p2.webp" 
-                src="maps_thumb/Halle18A_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="18A号馆"
-                onclick="openLightbox('maps/Halle18A_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle18A_p3.webp" 
-                src="maps_thumb/Halle18A_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="18A号馆"
-                onclick="openLightbox('maps/Halle18A_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-<div id="hall-Halle18B" class="hall-content hidden">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-gray-800">18B号馆</h3>
-            <span class="text-sm text-gray-500">3 页</span>
-        </div>
-        
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle18B_p1.webp" 
-                src="maps_thumb/Halle18B_p1.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="18B号馆"
-                onclick="openLightbox('maps/Halle18B_p1.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle18B_p2.webp" 
-                src="maps_thumb/Halle18B_p2.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="18B号馆"
-                onclick="openLightbox('maps/Halle18B_p2.png')"
-                style="max-width:100%;"
-            >
-        </div>
-        <div class="mb-4">
-            <img 
-                data-src="maps_thumb/Halle18B_p3.webp" 
-                src="maps_thumb/Halle18B_p3.webp"
-                class="lazy-img w-full rounded-lg shadow-sm border border-gray-200 cursor-zoom-in"
-                alt="18B号馆"
-                onclick="openLightbox('maps/Halle18B_p3.png')"
-                style="max-width:100%;"
-            >
-        </div>
-    </div>
-                </div>
-            </div>
-        </section>
 
-    </main>
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-header">
+            <span class="lightbox-title" id="lightboxTitle">展馆地图</span>
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        </div>
+        <div class="lightbox-content">
+            <img id="lightboxImg" src="" alt="展馆地图">
+        </div>
+        <div class="lightbox-nav" id="lightboxNav"></div>
+    </div>
 
     <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-            // Show selected section
-            document.getElementById('section-' + sectionId).classList.remove('hidden');
-            // Update tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-                btn.classList.add('bg-gray-100');
-            });
-            event.target.classList.add('active');
-            event.target.classList.remove('bg-gray-100');
+        // 展馆数据（已删除第一页总览，从第2页开始）
+        const halls = [
+            { name: "EN1 入口大厅", prefix: "EN1", pages: 3 },
+            { name: "ENB 入口大厅", prefix: "ENB", pages: 3 },
+            { name: "1号馆", prefix: "Halle1", pages: 5 },
+            { name: "3号馆", prefix: "Halle3", pages: 6 },
+            { name: "4号馆", prefix: "Halle4", pages: 6 },
+            { name: "5号馆", prefix: "Halle5", pages: 4 },
+            { name: "6号馆", prefix: "Halle6", pages: 6 },
+            { name: "7号馆", prefix: "Halle7", pages: 3 },
+            { name: "7.1号馆", prefix: "Halle7.1", pages: 7 },
+            { name: "7.2号馆", prefix: "Halle7.2", pages: 10 },
+            { name: "7A号馆", prefix: "Halle7A", pages: 5 },
+            { name: "8A号馆", prefix: "Halle8A", pages: 7 },
+            { name: "8B号馆", prefix: "Halle8B", pages: 10 },
+            { name: "9号馆", prefix: "Halle9", pages: 7 },
+            { name: "10号馆", prefix: "Halle10", pages: 7 },
+            { name: "11号馆", prefix: "Halle11", pages: 6 },
+            { name: "12号馆", prefix: "Halle12", pages: 5 },
+            { name: "13号馆", prefix: "Halle13", pages: 5 },
+            { name: "14号馆", prefix: "Halle14", pages: 4 },
+            { name: "15号馆", prefix: "Halle15", pages: 6 },
+            { name: "16号馆", prefix: "Halle16", pages: 5 },
+            { name: "17号馆", prefix: "Halle17", pages: 3 },
+            { name: "18A号馆", prefix: "Halle18A", pages: 3 },
+            { name: "18B号馆", prefix: "Halle18B", pages: 3 }
+        ];
+
+        let currentHall = null;
+        let currentPage = 1;
+
+        // 渲染卡片列表
+        function renderGrid() {
+            const grid = document.getElementById('hallGrid');
+            grid.innerHTML = halls.map(hall => {
+                // 缩略图用第2页（删除第一页总览）
+                const thumbSrc = `maps_thumb/${hall.prefix}_p2.webp`;
+                const totalPages = hall.pages;
+                const viewablePages = hall.pages - 1; // 减去第一页
+                
+                return `
+                    <div class="hall-card" onclick="openLightbox('${hall.prefix}', ${hall.pages}, '${hall.name}')">
+                        <img src="${thumbSrc}" alt="${hall.name}" loading="lazy" 
+                             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 133%22><rect fill=%22%23e2e8f0%22 width=%22100%22 height=%22133%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%2394a3b8%22 font-size=%2210%22>${hall.name}</text></svg>'">
+                        <div class="info">
+                            <div class="name">${hall.name}</div>
+                            <div class="pages">${viewablePages}页详情 · 点击查看</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
-        // 展馆切换
-        function switchHall(hallId, btn) {
-            document.querySelectorAll('.hall-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.hall-nav-btn').forEach(b => {
-                b.classList.remove('bg-primary-600', 'text-white');
-                b.classList.add('bg-white', 'text-gray-700');
-            });
-            const target = document.getElementById('hall-' + hallId);
-            if (target) {
-                target.classList.remove('hidden');
-                // 触发懒加载
-                loadImagesIn(target);
-            }
-            btn.classList.add('bg-primary-600', 'text-white');
-            btn.classList.remove('bg-white', 'text-gray-700');
-        }
-
-        // 懒加载
-        function loadImagesIn(container) {
-            container.querySelectorAll('img.lazy-img[data-src]').forEach(img => {
-                if (!img.dataset.loaded) {
-                    img.src = img.dataset.src;
-                    img.dataset.loaded = 'true';
-                    img.classList.remove('cursor-zoom-in');
-                    img.classList.add('cursor-zoom-in');
-                }
-            });
-        }
-
-        // 灯箱
-        function openLightbox(src) {
-            const box = document.getElementById('lightbox');
-            const imgEl = document.getElementById('lightbox-img');
-            imgEl.src = src;
-            box.classList.remove('hidden');
+        // 打开Lightbox
+        function openLightbox(prefix, totalPages, name) {
+            currentHall = { prefix, totalPages, name };
+            currentPage = 2; // 默认从第2页开始（跳过总览）
+            document.getElementById('lightboxTitle').textContent = name;
+            updateLightboxImage();
+            document.getElementById('lightbox').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
+
+        // 关闭Lightbox
         function closeLightbox() {
-            document.getElementById('lightbox').classList.add('hidden');
+            document.getElementById('lightbox').classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        // 初始化第一个展馆
-        document.addEventListener('DOMContentLoaded', () => {
-            const first = document.getElementById('hall-ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view');
-            if (first) {
-                first.classList.remove('hidden');
-                loadImagesIn(first);
+        // 更新Lightbox图片
+        function updateLightboxImage() {
+            const img = document.getElementById('lightboxImg');
+            let src;
+            if (currentHall.prefix === 'overview') {
+                src = `maps/ipc2601_01751_Gelaendeplan_Normal_Perspektive_von_oben_Febraur_2026_alle_4_Specials_view.png`;
+            } else {
+                src = `maps/${currentHall.prefix}_p${currentPage}.png`;
+            }
+            img.src = src;
+
+            // 渲染页码按钮（2到totalPages）
+            const nav = document.getElementById('lightboxNav');
+            const startPage = 2;
+            const endPage = currentHall.totalPages;
+            
+            if (endPage > startPage) {
+                let buttons = [];
+                buttons.push(`<button class="nav-btn" onclick="prevPage()">← 上一页</button>`);
+                for (let p = startPage; p <= endPage; p++) {
+                    const btnClass = p === currentPage ? 'active' : '';
+                    buttons.push(`<button class="${btnClass}" onclick="goToPage(${p})">${p}</button>`);
+                }
+                buttons.push(`<button class="nav-btn" onclick="nextPage()">下一页 →</button>`);
+                nav.innerHTML = buttons.join('');
+            } else {
+                nav.innerHTML = '';
+            }
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            updateLightboxImage();
+        }
+
+        function prevPage() {
+            if (currentPage > 2) {
+                currentPage--;
+                updateLightboxImage();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < currentHall.totalPages) {
+                currentPage++;
+                updateLightboxImage();
+            }
+        }
+
+        // 键盘支持
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevPage();
+            if (e.key === 'ArrowRight') nextPage();
+        });
+
+        // 点击背景关闭
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-content')) {
+                closeLightbox();
             }
         });
 
+        // 初始化
+        renderGrid();
     </script>
-
-    <!-- 灯箱 -->
-    <div id="lightbox" class="hidden fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center p-4" onclick="closeLightbox()">
-        <button class="absolute top-4 right-4 text-white text-3xl font-light leading-none z-10" onclick="closeLightbox()">&times;</button>
-        <img id="lightbox-img" src="" class="max-w-full max-h-full object-contain rounded shadow-2xl" onclick="event.stopPropagation()" style="touch-action:pinch-zoom;">
-    </div>
-
 </body>
 </html>
